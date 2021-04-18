@@ -1,7 +1,9 @@
+// import required modules
 const express = require('express');
 const mongoose = require('mongoose');
 const favicon = require('serve-favicon');
 const path = require('path');
+const itemRoutes = require('./routes/itemRoutes');
 
 // create express app
 const app = express();
