@@ -1,0 +1,24 @@
+{
+  "name": "automotive-intelligence",
+  "version": "1.0.0",
+  "description": "An IoT based smart automotive workshop",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FSocietyLK/Automotive-Intelligence.git"
+  },
+  "author": "FSocietyLK",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FSocietyLK/Automotive-Intelligence/issues"
+  },
+  "homepage": "https://github.com/FSocietyLK/Automotive-Intelligence#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
