@@ -13,7 +13,7 @@ const port = 3000;
 const uri = 'mongodb://localhost/automotive-intelligence';
 const options = { useNewUrlParser: true, useUnifiedTopology: true };
 
-mongoose.connect(uri, options).then(() => {
+mongoose.connect(uri, options).then((result) => {
     console.log("Databse connected");
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
@@ -32,6 +32,15 @@ app.use(express.static('public'));
 // set favicon
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
+// routes
 app.get('/', (req, res) => {
     res.render('index');
+});
+
+// tool routes
+app.use('/tools', toolRoutes);
+
+// 404 page
+app.use((req, res) => {
+    res.status(404).render('404', { title: 'Page not found' });
 });
