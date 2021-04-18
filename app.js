@@ -23,6 +23,8 @@ mongoose.connect(uri, options).then(() => {
 // set view engine
 app.set('view engine', 'ejs');
 
+// ------ middlewares -------
+
 // set static files
 app.use(express.static('public'));
 
