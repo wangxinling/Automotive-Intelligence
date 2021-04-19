@@ -29,12 +29,15 @@ app.set('view engine', 'ejs');
 // set static files
 app.use(express.static('public'));
 
+// use express body parser middleware
+app.use(express.urlencoded({ extended: true }));
+
 // set favicon
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
 // routes
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Automotive Intelligence' });
+    res.render('index', { title: 'Automotive Intelligence | Home' });
 });
 
 // tool routes
@@ -42,7 +45,7 @@ app.use('/tools', toolRoutes);
 
 // part routes
 app.get('/parts', (req, res) => {
-    res.render('parts', { title: 'Parts' });
+    res.render('parts', { title: 'Automotive Intelligence | Parts' });
 });
 
 // 404 page

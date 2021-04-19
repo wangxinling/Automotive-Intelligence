@@ -27,10 +27,6 @@ const toolSchema = new Schema({
         type: Boolean,
         default: true
     },
-    description: {
-        type: String,
-        required: true
-    },
     location: GeoSchema
 });
 

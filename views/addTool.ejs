@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+        <div class="add-tool content">
+            <form action="/tools" method="post">
+                <label for="name">Tool Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter Name" required>
+                <label for="size">Tool Size:</label>
+                <input type="text" id="size" name="size" placeholder="Enter Size" required>
+                <label for="name">Location Coordinates</label>
+                <label for="lat">Latitude:</label>
+                <input type="text" id="lat" name="lat" placeholder="Enter Latitude" required>
+                <label for="lng">Longitude:</label>
+                <input type="text" id="lng" name="lng" placeholder="Enter Longitude" required>
+                <button>Add Tool</button>
+            </form>
+        </div>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

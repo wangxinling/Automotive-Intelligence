@@ -8,7 +8,7 @@ const getAddTool = (req, res) => {
 
 const getAllTools = (req, res) => {
     Tool.find().sort({ createdAt: -1 }).then((result) => {
-        res.render('tools', { tools: result, title: 'Tools' });
+        res.render('tools', { tools: result, title: 'Automotive Intelligence | Tools' });
     }).catch((err) => {
         console.log(err);
     });
