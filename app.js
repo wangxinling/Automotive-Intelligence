@@ -11,10 +11,10 @@ const port = 3000;
 
 // connect to mongodb & listen for requests
 const uri = 'mongodb://localhost/automotive-intelligence';
-const options = { useNewUrlParser: true, useUnifiedTopology: true };
+const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
 
 mongoose.connect(uri, options).then((result) => {
-    console.log("Databse connected");
+    console.log("Database connected");
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`);
     });
@@ -34,11 +34,16 @@ app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
 // routes
 app.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { title: 'Automotive Intelligence' });
 });
 
 // tool routes
 app.use('/tools', toolRoutes);
+
+// part routes
+app.get('/parts', (req, res) => {
+    res.render('parts', { title: 'Parts' });
+});
 
 // 404 page
 app.use((req, res) => {

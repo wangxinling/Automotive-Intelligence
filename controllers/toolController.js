@@ -8,7 +8,7 @@ const getAddTool = (req, res) => {
 
 const getAllTools = (req, res) => {
     Tool.find().sort({ createdAt: -1 }).then((result) => {
-        res.render('tools', { tools: result, title: 'All tools' });
+        res.render('tools', { tools: result, title: 'Tools' });
     }).catch((err) => {
         console.log(err);
     });
