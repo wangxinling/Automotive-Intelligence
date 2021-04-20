@@ -7,8 +7,10 @@ const router = express.Router();
 
 // tool routes
 router.get('/add', toolController.getAddTool);
+router.get('/find', toolController.getFindTool);
 router.get('/', toolController.getAllTools);
 router.post('/', toolController.postAddTool);
+router.post('/find', toolController.postFindTool);
 router.get('/:id', toolController.getTool);
 router.delete('/:id', toolController.deleteTool);
 

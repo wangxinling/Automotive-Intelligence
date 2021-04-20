@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs") %>
+        <div class="find-tool content">
+            <form class="search" action="/tools/find" method="post">
+                <input type="text" name="search" placeholder="Search.." required>
+	            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <ul class="search-list">
+                <% if (locals.list && list.length > 0) { %>
+                    <% list.forEach(tool => { %>
+                        <li><a href="/tools/<%= tool.id %>"><%= `${tool.name}, Size ${tool.size}` %></a></li>
+                    <% }) %>
+                <% } else if (locals.list) { %>
+                    <p>Tool '<%= tool %>' cannot be found!</p>
+                <% } %>
+            </ul>
+        </div>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

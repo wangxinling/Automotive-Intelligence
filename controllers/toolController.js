@@ -6,6 +6,10 @@ const getAddTool = (req, res) => {
     res.render('addTool', { title: 'Add a new tool' });
 }
 
+const getFindTool = (req, res) => {
+    res.render('findTool', { title: 'Find a tool' });
+}
+
 const getAllTools = (req, res) => {
     Tool.find().sort({ createdAt: -1 }).then((result) => {
         res.render('tools', { tools: result, title: 'Automotive Intelligence | Tools' });
@@ -23,10 +27,19 @@ const postAddTool = (req, res) => {
     });
 }
 
+const postFindTool = (req, res) => {
+    const tool = req.body.search;
+    Tool.find({ "name": { $regex: ".*" + tool + ".*" } }).then((result) => {
+        res.render('findTool', { list: result, tool, title: 'Find a tool' });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 const getTool = (req, res) => {
     const id = req.params.id;
     Tool.findById(id).then((result) => {
-        res.render('findTool', { tool: result, title: 'Find a tool' });
+        res.render('toolDetails', { tool: result, title: 'Tool Details' });
     }).catch((err) => {
         console.log(err);
         res.render('404', { title: 'Page not found' });
@@ -45,8 +58,10 @@ const deleteTool = (req, res) => {
 // export tool controllers
 toolController = {
     getAddTool,
+    getFindTool,
     getAllTools,
     postAddTool,
+    postFindTool,
     getTool,
     deleteTool
 };
