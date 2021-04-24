@@ -3,8 +3,18 @@
     <%- include("./partials/head.ejs") %>
     <body>
         <%- include("./partials/nav.ejs", { active: "parts" }) %>
-        <div>
-            
+        <div class="default content">
+            <h2>All Parts</h2>
+            <% if (parts.length > 0) { %>
+                <% parts.forEach(part => { %>
+                    <a class="row" href="/parts/<%= part.id %>" <%- part.available ? "style='border-left-color: darkcyan'" : "" %>>
+                        <h3><%= `${part.type} ${part.name}` %></h3>
+                        <p><%= part.available ? "Available" : "Not Available" %></p>
+                    </a>
+                <% }) %>
+            <% } else { %>
+                <p>There are no parts to display...</p>
+            <% } %>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>

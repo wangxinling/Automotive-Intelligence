@@ -109,22 +109,22 @@ h3 {
     margin-left: 20px;
 }
 
-/* tools styles */
-.tools h3 {
+/* default page styles */
+.default h3 {
     text-transform: none;
 }
-.tools a {
+.default a {
 	display: block;
 	margin: 40px 0;
 	padding-left: 30px;
 	border-left: 6px solid crimson;
 }
 
-.tools a:hover h3 {
+.default a:hover h3 {
 	color: crimson;
 }
 
-/* toolDetails styles */
+/* details page styles */
 .details .row {
 	padding-left: 20px;
 	border-left: 6px solid crimson;
@@ -166,7 +166,7 @@ h3 {
 	box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
 }
 
-/* 404 styles */
+/* 404 page styles */
 .content_404 h1 {
     font-size: 8em;
 }
@@ -189,29 +189,34 @@ h3 {
     vertical-align: middle;
 }
 
-/* addTool styles */
-.add-tool form, .find-tool form {
+/* add page styles */
+.add form, .find form {
     max-width: 400px;
     margin: 0 auto 20px;
 }
 
-.add-tool input, .add-tool textarea {
+.add input, .add textarea {
     display: block;
     width: 100%;
     margin: 10px 0;
     padding: 8px;
 }
 
-.add-tool label {
+.add form label:nth-child(7) {
+    font-weight: 600;
+}
+
+.add label {
     display: block;
     margin-top: 24px;
 }
 
 textarea {
     height: 120px;
+    font-family: Arial;
 }
 
-.add-tool button {
+.add button {
     margin-top: 20px;
     background: crimson;
     color: white;
@@ -223,7 +228,7 @@ textarea {
     font-family: 'Noto Serif';
 }
 
-/* findTool styles */
+/* find page styles */
 .search input {
     display: inline-block;
 	font-size: 14px;

@@ -11,6 +11,11 @@
                 <a href="/tools/find">Find Tool</a>
             </div>
         </div>
-        <div><a href="/parts" <% if(active == "parts") { %> class="active" <% } %>>Parts</a></div>
+        <div class="dropdown"><a href="/parts" <% if(active == "parts") { %> class="active" <% } %>>Parts</a>
+            <div class="dropdown-content">
+                <a href="/parts/add">Add Part</a>
+                <a href="/parts/find">Find Part</a>
+            </div>
+        </div>
     </div>
 </nav>

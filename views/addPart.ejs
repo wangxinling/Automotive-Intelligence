@@ -2,21 +2,21 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "tools" }) %>
+        <%- include("./partials/nav.ejs", { active: "parts" }) %>
         <div class="add content">
-            <form action="/tools" method="post">
-                <label for="name">Tool Name:</label>
+            <form action="/parts" method="post">
+                <label for="name">Part Name:</label>
                 <input type="text" id="name" name="name" placeholder="Enter Name" required>
-                <label for="type">Tool Type:</label>
+                <label for="type">Part Type:</label>
                 <input type="text" id="type" name="type" placeholder="Enter Type" required>
-                <label for="size">Tool Size:</label>
-                <input type="text" id="size" name="size" placeholder="Enter Size" required>
+                <label for="desc">Description:</label>
+                <textarea id="desc" name="desc" required placeholder="Enter Description"></textarea>
                 <label for="name">Location Coordinates</label>
                 <label for="lng">Longitude:</label>
                 <input type="text" id="lng" name="lng" placeholder="Enter Longitude" required>
                 <label for="lat">Latitude:</label>
                 <input type="text" id="lat" name="lat" placeholder="Enter Latitude" required>
-                <button>Add Tool</button>
+                <button>Add Part</button>
             </form>
         </div>
         <%- include("./partials/footer.ejs") %>

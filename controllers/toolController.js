@@ -1,7 +1,7 @@
 // import required modules
 const Tool = require('../models/toolModel');
 
-// tool controllers
+/// tool controllers
 // get add tool page
 const getAddTool = (req, res) => {
     res.render('addTool', { title: 'Add a new tool' });
