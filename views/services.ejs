@@ -2,19 +2,20 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "parts" }) %>
+        <%- include("./partials/nav.ejs", { active: "services" }) %>
         <div class="find content">
-            <form class="search" action="/parts/find" method="post">
+            <form class="search" action="/services" method="post">
                 <input type="text" name="search" placeholder="Search.." required>
 	            <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             <ul class="search-list">
                 <% if (locals.list && list.length > 0) { %>
-                    <% list.forEach(part => { %>
-                        <li><a href="/parts/<%= part.id %>"><%= `${part.type} ${part.name}` %></a></li>
+                    <% list.forEach(vehicle => { %>
+                        <li><a href="/services/<%= vehicle.id %>"><%= `${vehicle.regoNum} | ${vehicle.year} ${vehicle.make} ${vehicle.model}` %></a></li>
                     <% }) %>
                 <% } else if (locals.list) { %>
-                    <p>Part '<%= part %>' cannot be found!</p>
+                    <p>Congrats! '<%= regoNum %>' is a new vehicle. Click below to add a new job card..</p>
+                    <a href="/services/add"><button>New Service</button></a>
                 <% } %>
             </ul>
         </div>

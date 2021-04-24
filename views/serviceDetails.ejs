@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs", { active: "services" }) %>
+        <div class="details content">
+            <h2>Job Card</h2>
+            <div class="row" style="border-left-color: darkcyan">
+                <p><label>Client: </label><label><%= vehicle.client %></label></p>
+                <p><label>Rego Number: </label><label><%= vehicle.regoNum %></label></p>
+                <p><label>Make : </label><label><%= vehicle.make %></label></p>
+                <p><label>Model : </label><label><%= vehicle.model %></label></p>
+                <p><label>Year: </label><label><%= vehicle.year %></label></p>
+                <p><label>Odometer: </label><label><%= vehicle.odo %></label></p>
+                <p><label>Date: </label><label><%= vehicle.date.toString().substring(4,24) %></label></p>
+            </div>
+        </div>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

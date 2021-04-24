@@ -202,7 +202,7 @@ h3 {
     padding: 8px;
 }
 
-.add form label:nth-child(7) {
+.add #loc {
     font-weight: 600;
 }
 
@@ -216,7 +216,7 @@ textarea {
     font-family: Arial;
 }
 
-.add button {
+.add button, .search-list button {
     margin-top: 20px;
     background: crimson;
     color: white;
@@ -226,6 +226,10 @@ textarea {
     cursor: pointer;
     border-radius: 2px;
     font-family: 'Noto Serif';
+}
+
+.add button:hover, .search-list button:hover {
+    filter: brightness(0.8);
 }
 
 /* find page styles */
@@ -246,6 +250,10 @@ textarea {
     border: 0;
 	cursor: pointer;
     border-radius: 0px 2px 2px 0px;
+}
+
+.search button:hover {
+    filter: brightness(0.8);
 }
 
 .search-list {
