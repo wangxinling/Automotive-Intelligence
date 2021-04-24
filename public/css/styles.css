@@ -48,6 +48,11 @@ nav p, nav a {
     font-weight: 300;
 }
 
+.navbar a.active {
+    background-color: #ddd;
+    color: black;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -105,6 +110,9 @@ h3 {
 }
 
 /* tools styles */
+.tools h3 {
+    text-transform: none;
+}
 .tools a {
 	display: block;
 	margin: 40px 0;
@@ -114,6 +122,48 @@ h3 {
 
 .tools a:hover h3 {
 	color: crimson;
+}
+
+/* toolDetails styles */
+.details .row {
+	padding-left: 20px;
+	border-left: 6px solid crimson;
+}
+
+.details .row p:first-child {
+    font-weight: 600;
+	color: sienna;
+}
+
+.details .row p:nth-child(2) {
+    font-weight: 600;
+}
+
+.details {
+	position: relative;
+}
+
+.details p {
+    margin: 16px;
+}
+
+.delete i {
+    font-size: 1.5em;
+}
+
+.delete {
+	position: absolute;
+	top: 0;
+	right: 0;
+    width: 2.5%;
+    text-align: center;
+	border-radius: 50%;
+	padding: 8px;
+}
+
+.delete:hover {
+	cursor: pointer;
+	box-shadow: 1px 2px 3px rgba(0,0,0,0.2);
 }
 
 /* 404 styles */

@@ -2,7 +2,7 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs") %>
+        <%- include("./partials/nav.ejs", { active: "tools" }) %>
         <div class="find-tool content">
             <form class="search" action="/tools/find" method="post">
                 <input type="text" name="search" placeholder="Search.." required>
@@ -11,7 +11,7 @@
             <ul class="search-list">
                 <% if (locals.list && list.length > 0) { %>
                     <% list.forEach(tool => { %>
-                        <li><a href="/tools/<%= tool.id %>"><%= `${tool.name}, Size ${tool.size}` %></a></li>
+                        <li><a href="/tools/<%= tool.id %>"><%= `${tool.type} ${tool.name}, Size ${tool.size}` %></a></li>
                     <% }) %>
                 <% } else if (locals.list) { %>
                     <p>Tool '<%= tool %>' cannot be found!</p>

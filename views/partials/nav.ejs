@@ -4,13 +4,13 @@
         <p>An IoT based smart automotive workshop</p>
     </div>
     <div class="navbar">
-        <div><a href="/">Home</a></div>
-        <div class="dropdown"><a href="/tools">Tools</a>
+        <div><a href="/" <% if(active == "home") { %> class="active" <% } %>>Home</a></div>
+        <div class="dropdown"><a href="/tools" <% if(active == "tools") { %> class="active" <% } %>>Tools</a>
             <div class="dropdown-content">
                 <a href="/tools/add">Add Tool</a>
                 <a href="/tools/find">Find Tool</a>
             </div>
         </div>
-        <div><a href="/parts">Parts</a></div>
+        <div><a href="/parts" <% if(active == "parts") { %> class="active" <% } %>>Parts</a></div>
     </div>
 </nav>

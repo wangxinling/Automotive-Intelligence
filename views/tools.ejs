@@ -2,14 +2,14 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs") %>
+        <%- include("./partials/nav.ejs", { active: "tools" }) %>
         <div class="tools content">
             <h2>All Tools</h2>
             <% if (tools.length > 0) { %>
                 <% tools.forEach(tool => { %>
-                    <a class="single" href="javascript:void(0)" <%- tool.available ? "style='border-left-color: darkcyan'" : "" %>>
-                        <h3 class="name"><%= `${tool.name}, Size ${tool.size}` %></h3>
-                        <p class="available"><%= tool.available ? "Available" : "Not Available" %></p>
+                    <a class="row" href="/tools/<%= tool.id %>" <%- tool.available ? "style='border-left-color: darkcyan'" : "" %>>
+                        <h3><%= `${tool.type} ${tool.name}, Size ${tool.size}` %></h3>
+                        <p><%= tool.available ? "Available" : "Not Available" %></p>
                     </a>
                 <% }) %>
             <% } else { %>

@@ -15,10 +15,13 @@ const GeoSchema = new Schema({
 });
 
 // create tool schema
-const toolSchema = new Schema({
+const ToolSchema = new Schema({
     name: {
         type: String,
         required: true
+    },
+    type: {
+        type: String
     },
     size: {
         type: String
@@ -31,5 +34,5 @@ const toolSchema = new Schema({
 });
 
 // create and export tool instance
-const Tool = mongoose.model('Tool', toolSchema);
+const Tool = mongoose.model('tool', ToolSchema);
 module.exports = Tool;
