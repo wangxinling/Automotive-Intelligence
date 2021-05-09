@@ -17,7 +17,7 @@ const port = process.env.PORT || 443;
 const httpsOptions = {
     key: fs.readFileSync(path.join(__dirname,'sslcert/server.key')),
     cert: fs.readFileSync(path.join(__dirname,'sslcert/server.crt'))
-  }  
+}
 
 // connect to mongodb & listen for requests
 const uri = 'mongodb+srv://sit725:sit725@Deakin@cluster0.lztrc.mongodb.net/automotive-intelligence?retryWrites=true&w=majority';
