@@ -10,4 +10,4 @@ After installing, run the server using
 
 When the server is running, visit following URL in the browser
 
-    http://localhost:3000
+    https://localhost
