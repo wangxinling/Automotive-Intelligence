@@ -24,13 +24,13 @@ const getAllTools = (req, res) => {
 // add a tool to the database
 const postAddTool = (req, res) => {
     const tool = new Tool({
-        name : req.body.name,
-        type : req.body.type,
-        size : req.body.size,
+        name: req.body.name,
+        type: req.body.type,
+        size: req.body.size,
         available: req.body.available,
-        location : {
-            type : 'Point',
-            coordinates : [parseFloat(req.body.lng) , parseFloat(req.body.lat)]
+        location: {
+            type: 'Point',
+            coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)]
         }
     });
     tool.save().then((result) => {
@@ -71,6 +71,36 @@ const deleteTool = (req, res) => {
     });
 }
 
+//  every minuter check one time all tools' location
+const usage = () => {
+    Tool.find().sort({ createdAt: -1 }).then((result) => {
+        result.forEach(tool => {
+            // if the tool's location is changed then add 1 time usage
+            if (tool.oldLocation == null ||
+                tool.location.coordinates[0] != tool.oldLocation.coordinates[0] ||
+                tool.location.coordinates[1] != tool.oldLocation.coordinates[1]
+            ) {
+                tool.usageNum += 1;
+                tool.oldLocation = tool.location;
+                Tool.updateOne({ _id: tool._id }, { usageNum: tool.usageNum, oldLocation: tool.oldLocation }).then((result) => {
+                    console.log(`update object`);
+                }).catch((err) => {
+                    console.log(err);
+                });
+            }
+            else
+            {
+                //console.log(`doesn't neet to update object`);
+            }
+
+        });
+
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
+
 // export tool controllers
 toolController = {
     getAddTool,
@@ -79,6 +109,7 @@ toolController = {
     postAddTool,
     postFindTool,
     getTool,
-    deleteTool
+    deleteTool,
+    usage
 };
 module.exports = toolController;

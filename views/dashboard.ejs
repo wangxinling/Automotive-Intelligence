@@ -1,6 +1,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div style="width:500px; height:500px;">
-    <canvas id="myChart"></canvas>
+<div style="width:500px; height:300px;">
+    <canvas id="totalNumChart"></canvas>
+</div>
+<div style="width:500px; height:300px;">
+  <canvas id="usageChart"></canvas>
 </div>
 
 <script>
@@ -43,6 +46,49 @@ const config = {
   },
 };
 
-var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('totalNumChart').getContext('2d');
 var myChart = new Chart(ctx, config);
+
+
+
+var labelsTool = [];
+var backgroundColorsTool = [];
+var borderColorTool = [];
+var datasTool = [];
+<% var toolDic={}; %>
+<%for (let key in tools) {%>
+  <%  var element = tools[key]; %>
+  <%  if(toolDic[element.name] == null){toolDic[element.name] = element.usageNum; %>
+  <%  }else{toolDic[element.name] += element.usageNum;}    }; %>
+  <% for (var key in toolDic){ %>
+  labelsTool.push("<%= key %>");
+  backgroundColorsTool.push('rgb(255, 99, 132)');
+  datasTool.push("<%= toolDic[key] %>");
+<%};%>
+
+const dataTool = {
+  labels: labelsTool,
+  datasets: [{
+    label: 'Tool usages',
+    data: datasTool,
+    backgroundColor: backgroundColorsTool,
+    borderWidth: 1
+  }]
+};
+
+const configTool = {
+  type: 'bar',
+  data: dataTool,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+
+var ctx2 = document.getElementById('usageChart').getContext('2d');
+var myChartTool = new Chart(ctx2, configTool);
+
 </script>

@@ -33,6 +33,16 @@ const ToolSchema = new Schema({
     location: {
         type: GeoSchema,
         require: true
+    },
+    // for usage
+    oldLocation:{
+        type: GeoSchema,
+        require:false
+    },
+    // for usage
+    usageNum:{
+        type: Number,
+        default:0
     }
 });
 
