@@ -524,13 +524,14 @@ h2 {
 	padding: 0;
 	font-weight: bold;
 	color: #222;
-	font-family: Poppins;
+	
 	font-size: 36px;
 }
 
 .main {
 	background: #D9D9D9;
-	padding: 150px 0;
+	padding: 43px 0;
+	font-family: Poppins;
 }
 
 .clear {
@@ -543,7 +544,7 @@ body {
 	color: #222;
 	background: #f8f8f8;
 	font-weight: 400;
-	font-family: Poppins;
+	
 }
 
 .container {
@@ -600,7 +601,7 @@ body {
 }
 
 .signup {
-	margin-bottom: 150px;
+	margin-bottom: 0px;
 }
 
 .signup-content {
