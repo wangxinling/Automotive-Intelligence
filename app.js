@@ -15,7 +15,7 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const toolRoutes = require('./routes/toolRoutes');
 const partRoutes = require('./routes/partRoutes');
 
-// configure .env for environment variables
+// import .env config for environment variables
 require('dotenv').config();
 
 // create express app
@@ -68,6 +68,9 @@ app.use(
 		}
 	})
 );
+
+// import passport config
+require("./config/passport")(passport);
 
 // passport middleware
 app.use(passport.initialize());

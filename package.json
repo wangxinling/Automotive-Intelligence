@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/FSocietyLK/Automotive-Intelligence#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "dotenv": "^9.0.2",
     "ejs": "^3.1.6",
@@ -26,6 +27,7 @@
     "mongoose": "^5.12.4",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "serve-favicon": "^2.5.0"
   }
 }
