@@ -1,5 +1,7 @@
 // import required modules
 const mongoose = require('mongoose');
+
+// import models
 const Service = require('../models/serviceModel');
 
 /// service controllers

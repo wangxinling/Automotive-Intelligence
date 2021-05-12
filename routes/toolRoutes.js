@@ -1,5 +1,7 @@
-// import require modules
+// import required modules
 const express = require('express');
+
+// import controllers
 const toolController = require('../controllers/toolController');
 
 // create express router

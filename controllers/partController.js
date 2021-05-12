@@ -1,4 +1,4 @@
-// import required modules
+// import models
 const Part = require('../models/partModel');
 
 /// part controllers

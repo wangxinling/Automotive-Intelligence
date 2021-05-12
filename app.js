@@ -1,13 +1,22 @@
 // import required modules
 const express = require('express');
+const session = require("express-session");
 const https = require('https');
 const mongoose = require('mongoose');
 const favicon = require('serve-favicon');
+const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
+const cookieParser = require('cookie-parser');
+
+// import routes
+const userRoutes = require('./routes/userRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const toolRoutes = require('./routes/toolRoutes');
 const partRoutes = require('./routes/partRoutes');
+
+// configure .env for environment variables
+require('dotenv').config();
 
 // create express app
 const app = express();
@@ -20,7 +29,7 @@ const httpsOptions = {
 }
 
 // connect to mongodb & listen for requests
-const uri = 'mongodb+srv://sit725:sit725@Deakin@cluster0.lztrc.mongodb.net/automotive-intelligence?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
 
 mongoose.connect(uri, options).then((result) => {
@@ -39,16 +48,38 @@ app.set('view engine', 'ejs');
 // set static files
 app.use(express.static('public'));
 
-// use express body parser middleware
-app.use(express.urlencoded({ extended: true }));
-
 // set favicon
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
-// routes
+// use express body parser & cookie parser middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// set express session
+app.use(
+	session({
+		secret: process.env.SECRET,
+		resave: true,
+		saveUninitialized: true,
+		cookie: {
+            secure: true,
+			maxAge: 3600000
+		}
+	})
+);
+
+// passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+/// routes
 app.get('/', (req, res) => {
     res.render('index', { title: 'Automotive Intelligence | Home' });
 });
+
+// user routes
+app.use('/users', userRoutes);
 
 // service routes
 app.use('/services', serviceRoutes);

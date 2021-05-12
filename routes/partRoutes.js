@@ -1,5 +1,7 @@
-// import require modules
+// import required modules
 const express = require('express');
+
+// import controllers
 const partController = require('../controllers/partController');
 
 // create express router

@@ -1,4 +1,4 @@
-// import required modules
+// import models
 const Tool = require('../models/toolModel');
 
 /// tool controllers
