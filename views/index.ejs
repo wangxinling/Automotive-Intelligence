@@ -4,7 +4,7 @@
     <body>
         <%- include("./partials/nav.ejs", { active: "dashboard" }) %>
         <div>
-            
+            <%- include("./dashboard.ejs"),{parts: parts, tools: tools, services:services} %>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>

@@ -15,10 +15,8 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const toolRoutes = require('./routes/toolRoutes');
 const partRoutes = require('./routes/partRoutes');
 
-// import .env config for environment variables
-require('dotenv').config();
-
-// create express app
+const dashboardController = require('./controllers/dashboardController');// import .env config for environment variables
+require('dotenv').config();// create express app
 const app = express();
 
 // set application port and ssl certificate
@@ -48,8 +46,10 @@ app.set('view engine', 'ejs');
 // set static files
 app.use(express.static('public'));
 
+
 // set favicon
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
+
 
 // use express body parser & cookie parser middleware
 app.use(express.json());
@@ -77,9 +77,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /// routes
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Automotive Intelligence | Home' });
-});
+app.get('/', dashboardController.getAllDashboard);
 
 // user routes
 app.use('/users', userRoutes);

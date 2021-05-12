@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div style="width:500px; height:500px;">
+    <canvas id="myChart"></canvas>
+</div>
+
+<script>
+const partsNum = <%= parts.length %>;
+const toolsNum = <%= tools.length %>;
+const servicesNum = <%= services.length %>;
+const labels = ["Parts","Tools","Services"];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'The total number of statistics',
+    data: [
+    partsNum,
+    toolsNum,
+    servicesNum
+    ],
+    backgroundColor: [
+      'rgba(255, 99, 132, 0.2)',
+      'rgba(255, 159, 64, 0.2)',
+      'rgba(201, 203, 207, 0.2)'
+    ],
+    borderColor: [
+      'rgb(255, 99, 132)',
+      'rgb(255, 159, 64)',
+      'rgb(201, 203, 207)'
+    ],
+    borderWidth: 1
+  }]
+};
+
+const config = {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  },
+};
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, config);
+</script>
