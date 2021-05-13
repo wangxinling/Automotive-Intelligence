@@ -2,11 +2,32 @@
 <div style="width:500px; height:300px;">
     <canvas id="totalNumChart"></canvas>
 </div>
-<div style="width:500px; height:300px;">
+<div style="width:300px; height:300px;">
   <canvas id="usageChart"></canvas>
 </div>
 
+<div style="width:500px; height:300px;">
+  <canvas id="partChart"></canvas>
+</div>
+
 <script>
+
+const COLORS = [
+  '#4dc9f6',
+  '#f67019',
+  '#f53794',
+  '#537bc4',
+  '#acc236',
+  '#166a8f',
+  '#00a950',
+  '#58595b',
+  '#8549ba'
+];
+function color(index) {
+  return COLORS[index % COLORS.length];
+}
+
+//totalNumChart
 const partsNum = <%= parts.length %>;
 const toolsNum = <%= tools.length %>;
 const servicesNum = <%= services.length %>;
@@ -21,9 +42,9 @@ const data = {
     servicesNum
     ],
     backgroundColor: [
-      'rgba(255, 99, 132, 0.2)',
-      'rgba(255, 159, 64, 0.2)',
-      'rgba(201, 203, 207, 0.2)'
+    color(0),
+    color(1),
+    color(2)
     ],
     borderColor: [
       'rgb(255, 99, 132)',
@@ -50,7 +71,7 @@ var ctx = document.getElementById('totalNumChart').getContext('2d');
 var myChart = new Chart(ctx, config);
 
 
-
+//usageChart
 var labelsTool = [];
 var backgroundColorsTool = [];
 var borderColorTool = [];
@@ -60,9 +81,11 @@ var datasTool = [];
   <%  var element = tools[key]; %>
   <%  if(toolDic[element.name] == null){toolDic[element.name] = element.usageNum; %>
   <%  }else{toolDic[element.name] += element.usageNum;}    }; %>
-  <% for (var key in toolDic){ %>
+var index = 0;
+<% for (var key in toolDic){ %>
   labelsTool.push("<%= key %>");
-  backgroundColorsTool.push('rgb(255, 99, 132)');
+  backgroundColorsTool.push(color(index));
+  index ++;
   datasTool.push("<%= toolDic[key] %>");
 <%};%>
 
@@ -77,8 +100,59 @@ const dataTool = {
 };
 
 const configTool = {
-  type: 'bar',
+  type: 'pie',
   data: dataTool,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Tool usages'
+      }
+    }
+  },
+};
+
+var ctx2 = document.getElementById('usageChart').getContext('2d');
+var myChartTool = new Chart(ctx2, configTool);
+
+
+//partChart
+
+var labelsPart = [];
+var backgroundColorsPart = [];
+
+var datasPart = [];
+
+<% var partDic={}; %>
+<%for (let key in parts) {%>
+  <%  var element = parts[key]; %>
+  <%  if(partDic[element.name] == null){partDic[element.name] = 1; %>
+  <%  }else{partDic[element.name] += 1;}    }; %>
+var index = 0;
+<% for (var key in partDic){ %>
+  labelsPart.push("<%= key %>");
+  backgroundColorsPart.push(color(index));
+  index ++;
+  datasPart.push("<%= partDic[key] %>");
+<%};%>
+
+const dataPart = {
+  labels: labelsPart,
+  datasets: [{
+    label: 'Parts summary',
+    data: datasPart,
+    backgroundColor: backgroundColorsPart,
+    borderWidth: 1
+  }]
+};
+
+const configPart = {
+  type: 'bar',
+  data: dataPart,
   options: {
     scales: {
       y: {
@@ -88,7 +162,7 @@ const configTool = {
   },
 };
 
-var ctx2 = document.getElementById('usageChart').getContext('2d');
-var myChartTool = new Chart(ctx2, configTool);
+var ctx3 = document.getElementById('partChart').getContext('2d');
+var myChartTool = new Chart(ctx3, configPart);
 
 </script>
