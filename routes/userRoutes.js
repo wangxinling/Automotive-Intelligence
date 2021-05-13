@@ -15,6 +15,7 @@ router.post('/login', passport.authenticate("local"), userController.postLogin);
 router.get('/logout', userController.getLogout);
 router.post('/signup', userController.postSignup);
 router.post('/auth/google', userController.postGoogleLogin);
+router.post('/auth/facebook', userController.postFacebookLogin);
 
 // export router handles
 module.exports = router;

@@ -4,6 +4,9 @@ const bcrypt = require('bcryptjs');
 // import models
 const User = require('../models/userModel');
 
+//import configs
+const authConfig = require('../config/auth');
+
 /// user controllers
 // get user login page
 const getLogin = (req, res) => {
@@ -70,7 +73,7 @@ const getLogout = (req, res) => {
 const postGoogleLogin = async (req, res) => {
     try {
         const code = req.body.code;
-        const profile = await googleOAuth.getProfile(code);
+        const profile = await authConfig.getGoogleProfile(code);
         const user = {
             id: profile.sub,
             name: profile.name,
@@ -78,43 +81,28 @@ const postGoogleLogin = async (req, res) => {
         };
     
         // adding google user to the database
-        User.findOne({ email: user.email }).then((dbUser) => {
-            if (dbUser) {
-                req.user = dbUser;
-                req.session.passport = { user: dbUser.id };
-                console.log("This user already exists");
-                console.log(req.user);
-                console.log(req.session);
-            } else {
-                dbUser = {
-                    name: user.name,
-                    email: user.email,
-                    password: user.id,
-                };
-        
-                const newUser = new User(dbUser);
-        
-                bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(dbUser.password, salt, (err, hash) => {
-                        if (err) throw err;
-                        newUser.password = hash;
-            
-                        newUser.save().then((user) => {
-                            req.user = user;
-                            req.session.passport = { user: user.id };
-                            console.log("Google user has been added to the database");
-            
-                            console.log(req.user);
-                            console.log(req.session);
-                        })
-                        .catch((err) => {
-                            console.log(err);
-                        });
-                    });
-                });
-            }
-        });
+        authConfig.addUser(user);
+        res.redirect("/");
+    } catch (err) {
+        console.log(err);
+        res.status(401).send();
+    }
+}
+
+// authenticate facebook user
+const postFacebookLogin = async (req, res) => {
+    try {
+        const userId = req.body.userId;
+        const accessToken = req.body.accessToken;
+        const profile = await authConfig.getFacebookProfile(userId, accessToken);
+        const user = {
+            id: profile.id,
+            name: profile.name,
+            email: profile.email
+        };
     
+        // adding facebook user to the database
+        authConfig.addUser(user);
         res.redirect("/");
       } catch (err) {
         console.log(err);
@@ -129,6 +117,7 @@ userController = {
     postLogin,
     postSignup,
     getLogout,
-    postGoogleLogin
+    postGoogleLogin,
+    postFacebookLogin
 };
 module.exports = userController;
