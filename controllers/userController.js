@@ -1,3 +1,6 @@
+// import required modules
+const bcrypt = require('bcryptjs');
+
 // import models
 const User = require('../models/userModel');
 
@@ -12,7 +15,7 @@ const getSignup = (req, res) => {
     res.render('signup', { title: 'Register' });
 }
 
-// log a user in
+// log in a user
 const postLogin = (req, res) => {
     if (req.isAuthenticated()) {
         res.send({ user: req.user });
@@ -21,7 +24,41 @@ const postLogin = (req, res) => {
     }
 }
 
-// log a user out
+// register a user
+const postSignup = (req, res) => {
+    const { name, email, password } = req.body;
+
+    User.findOne({ email: email }).then((user) => {
+        if (user) {
+          res.send({ errors: ["Email already exists"] });
+        } else {
+            user = {
+                name,
+                email,
+                password,
+            };
+            
+            const newUser = new User(user);
+
+            bcrypt.genSalt(10, (err, salt) => {
+                bcrypt.hash(user.password, salt, (err, hash) => {
+                    if (err) throw err;
+                    newUser.password = hash;
+
+                    newUser.save().then((user) => {
+                        console.log("User has been added to the database");
+                    }).catch((err) => {
+                        console.log(err)
+                    });
+                });
+            });
+        }
+    });
+
+    res.redirect("/users/login");
+}
+
+// log out a user
 const getLogout = (req, res) => {
     req.logout();
     res.redirect('/users/login');
@@ -32,6 +69,7 @@ userController = {
     getLogin,
     getSignup,
     postLogin,
+    postSignup,
     getLogout
 };
 module.exports = userController;

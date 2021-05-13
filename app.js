@@ -35,7 +35,7 @@ const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateInde
 mongoose.connect(uri, options).then((result) => {
     console.log("Database connected");
     https.createServer(httpsOptions, app).listen(port, () => {
-        console.log(`Server is running on port ${port}`);
+        console.log(`https://localhost:${port}`);
     });
 }).catch((err) => {
     console.log(err);
