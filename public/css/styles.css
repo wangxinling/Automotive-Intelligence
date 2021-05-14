@@ -16,6 +16,7 @@ p, h1, h2, h3, a, ul {
 /* nav & footer styles */
 nav {
     display: flex;
+	position: relative;
     justify-content: space-between;
     margin-bottom: 60px;
     padding-bottom: 10px;
