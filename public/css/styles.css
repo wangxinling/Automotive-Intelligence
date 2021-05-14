@@ -445,6 +445,29 @@ list-type-ulli,
 	/* Legacy iOS */
 }
 
+.title .profile {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.profile button {
+	background-color: crimson;
+	padding: 4px 10px;
+	float: right;
+	color: white;
+	border: none;
+	outline: none;
+	border-radius: 2px;
+	font-family: 'Noto Serif';
+	font-size: 1em;
+	cursor: pointer;   
+}
+
+.profile .username {
+	margin-bottom: 4px;
+}
+
 .sign a:focus,
 .sign a:active {
 	text-decoration: none;
