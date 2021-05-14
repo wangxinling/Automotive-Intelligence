@@ -80,5 +80,5 @@ toolController = {
     postFindTool,
     getTool,
     deleteTool
-};
+}
 module.exports = toolController;

@@ -6,11 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Automotive Intelligence</title>
 
-    <!-- Font Icon -->
+    <!-- Font icon -->
     <link rel="stylesheet" href="/css/material-icon.css">
 
     <!-- Main css -->
     <link rel="stylesheet" href="/css/styles.css">
+    
+    <!-- Main js -->
+    <script type="text/javascript" src="/js/auth.js"></script>
+
+    <!-- Load google apis -->
+    <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 </head>
 <body style="background-color: #D9D9D9;">
     <div class="main">
@@ -26,7 +32,7 @@
 
                     <div class="signin-form">
                         <h2 class="form-title">Sign in</h2>
-                        <form method="post" class="register-form" id="login-form">
+                        <form method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" name="email" id="email" placeholder="Email"/>
@@ -46,9 +52,8 @@
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
                             <ul class="socials">
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                                <li><button id='btn-facebook' disabled>Sign In</button></li>
+                                <li><button id='btn-google' onclick="oauth2SignIn();">Sign In</button></li>
                             </ul>
                         </div>
                     </div>

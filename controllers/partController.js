@@ -80,5 +80,5 @@ partController = {
     postFindPart,
     getPart,
     deletePart
-};
+}
 module.exports = partController;

@@ -13,7 +13,7 @@ require("dotenv").config();
 const client = new OAuth2Client(
     process.env.GOOGLE_CLIENT_ID,
     process.env.GOOGLE_CLIENT_SECRET,
-    'postmessage'
+    'https://localhost/users/auth/google'
 );
 
 const getUserData = async (userId, accessToken) => {
@@ -38,9 +38,9 @@ const getUserData = async (userId, accessToken) => {
     });
 
     return userData;
-};
+}
 
-exports.addUser = (user) => {
+exports.addUser = (req, user) => {
     User.findOne({ email: user.email }).then((dbUser) => {
         if (dbUser) {
             req.user = dbUser;
@@ -77,7 +77,7 @@ exports.addUser = (user) => {
             });
         }
     });
-};
+}
 
 exports.getGoogleProfile = async (code) => {
     const authToken = await client.getToken(code);
@@ -91,7 +91,7 @@ exports.getGoogleProfile = async (code) => {
     const payload = ticket.getPayload();
 
     return payload;
-};
+}
 
 exports.getFacebookProfile = async (userId, accessToken) => {
     const urlFetchToken = new URL('https://graph.facebook.com/oauth/access_token');
