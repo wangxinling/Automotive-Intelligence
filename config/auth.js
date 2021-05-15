@@ -16,8 +16,8 @@ const client = new OAuth2Client(
     'https://localhost/users/auth/google'
 );
 
-const getUserData = async (userId, accessToken) => {
-    const urlFetchData = new URL(`https://graph.facebook.com/${userId}`);
+const getUserData = async (accessToken) => {
+    const urlFetchData = new URL(`https://graph.facebook.com/me`);
 
     const params = {
         fields: "name,email",
@@ -93,14 +93,14 @@ exports.getGoogleProfile = async (code) => {
     return payload;
 }
 
-exports.getFacebookProfile = async (userId, accessToken) => {
+exports.getFacebookProfile = async (code) => {
     const urlFetchToken = new URL('https://graph.facebook.com/oauth/access_token');
 
     const params = {
-        grant_type: "fb_exchange_token",
         client_id: process.env.FACEBOOK_CLIENT_ID,
         client_secret: process.env.FACEBOOK_CLIENT_SECRET,
-        fb_exchange_token: accessToken
+        redirect_uri: "https://localhost/users/auth/facebook",
+        code: code
     };
 
     urlFetchToken.search = new URLSearchParams(params).toString();
@@ -110,7 +110,7 @@ exports.getFacebookProfile = async (userId, accessToken) => {
     }).then((res) => {
         return res.json();
     }).then((token) => {
-        const userData = getUserData(userId, token.access_token);
+        const userData = getUserData(token.access_token);
         return userData;
     }).catch((err) => {
         console.log(err);

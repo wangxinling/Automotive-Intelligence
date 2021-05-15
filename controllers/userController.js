@@ -79,7 +79,7 @@ const postGoogleLogin = async (req, res) => {
             name: profile.name,
             email: profile.email,
         };
-    
+        console.log(profile);
         // adding google user to the database
         authConfig.addUser(req, user);
         res.redirect("/");
@@ -92,9 +92,8 @@ const postGoogleLogin = async (req, res) => {
 // authenticate facebook user
 const postFacebookLogin = async (req, res) => {
     try {
-        const userId = req.body.userId;
-        const accessToken = req.body.accessToken;
-        const profile = await authConfig.getFacebookProfile(userId, accessToken);
+        const code = req.query.code;
+        const profile = await authConfig.getFacebookProfile(code);
         const user = {
             id: profile.id,
             name: profile.name,
@@ -102,7 +101,7 @@ const postFacebookLogin = async (req, res) => {
         };
     
         // adding facebook user to the database
-        authConfig.addUser(user);
+        authConfig.addUser(req, user);
         res.redirect("/");
       } catch (err) {
         console.log(err);
