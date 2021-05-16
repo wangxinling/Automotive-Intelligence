@@ -72,16 +72,16 @@ const getLogout = (req, res) => {
 // authenticate google user
 const postGoogleLogin = async (req, res) => {
     try {
-        const code = req.body.code;
+        const code = req.query.code;
         const profile = await authConfig.getGoogleProfile(code);
         const user = {
             id: profile.sub,
             name: profile.name,
             email: profile.email,
         };
-    
+        console.log(profile);
         // adding google user to the database
-        authConfig.addUser(user);
+        authConfig.addUser(req, user);
         res.redirect("/");
     } catch (err) {
         console.log(err);
@@ -92,9 +92,8 @@ const postGoogleLogin = async (req, res) => {
 // authenticate facebook user
 const postFacebookLogin = async (req, res) => {
     try {
-        const userId = req.body.userId;
-        const accessToken = req.body.accessToken;
-        const profile = await authConfig.getFacebookProfile(userId, accessToken);
+        const code = req.query.code;
+        const profile = await authConfig.getFacebookProfile(code);
         const user = {
             id: profile.id,
             name: profile.name,
@@ -102,7 +101,7 @@ const postFacebookLogin = async (req, res) => {
         };
     
         // adding facebook user to the database
-        authConfig.addUser(user);
+        authConfig.addUser(req, user);
         res.redirect("/");
       } catch (err) {
         console.log(err);
@@ -119,5 +118,5 @@ userController = {
     getLogout,
     postGoogleLogin,
     postFacebookLogin
-};
+}
 module.exports = userController;

@@ -62,5 +62,5 @@ serviceController = {
     postFindService,
     postAddService,
     getServiceDetails
-};
+}
 module.exports = serviceController;

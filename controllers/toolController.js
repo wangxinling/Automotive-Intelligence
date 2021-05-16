@@ -111,5 +111,5 @@ toolController = {
     getTool,
     deleteTool,
     usage
-};
+}
 module.exports = toolController;
