@@ -4,18 +4,28 @@ const Part = require('../models/partModel');
 /// part controllers
 // get add part page
 const getAddPart = (req, res) => {
-    res.render('addPart', { title: 'Add a new part' });
+    res.render('addPart', {
+        email: req.user.email,
+        title: 'Add a new part'
+    });
 }
 
 // get find part page
 const getFindPart = (req, res) => {
-    res.render('findPart', { title: 'Find a part' });
+    res.render('findPart', {
+        email: req.user.email,
+        title: 'Find a part'
+    });
 }
 
 // get all parts from database
 const getAllParts = (req, res) => {
     Part.find().sort({ createdAt: -1 }).then((result) => {
-        res.render('parts', { parts: result, title: 'Automotive Intelligence | Parts' });
+        res.render('parts', {
+            email: req.user.email,
+            parts: result,
+            title: 'Automotive Intelligence | Parts'
+        });
     }).catch((err) => {
         console.log(err);
     });
@@ -44,7 +54,11 @@ const postAddPart = (req, res) => {
 const postFindPart = (req, res) => {
     const part = req.body.search;
     Part.find({ "name": { $regex: ".*" + part + ".*" } }).then((result) => {
-        res.render('findPart', { list: result, part, title: 'Find a part' });
+        res.render('findPart', {
+            email: req.user.email,
+            list: result, part,
+            title: 'Find a part'
+        });
     }).catch((err) => {
         console.log(err);
     });
@@ -54,7 +68,11 @@ const postFindPart = (req, res) => {
 const getPart = (req, res) => {
     const id = req.params.id;
     Part.findById(id).then((result) => {
-        res.render('partDetails', { part: result, title: 'Part Details' });
+        res.render('partDetails', {
+            email: req.user.email,
+            part: result,
+            title: 'Part Details'
+        });
     }).catch((err) => {
         console.log(err);
         res.render('404', { title: 'Page not found' });

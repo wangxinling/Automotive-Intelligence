@@ -6,17 +6,22 @@ const Tool = require('../models/toolModel');
 
 // get all parts from database
 const getAllDashboard = (req, res) => {
-    var partResults;
-    var serviceResults;
-    var toolResults;
+    let partResults;
+    let serviceResults;
+    let toolResults;
     Part.find().sort({ createdAt: -1 }).then((result) => {
         partResults = result;
         Service.find().sort({ createdAt: -1 }).then((result) => {
             serviceResults = result;
             Tool.find().sort({ createdAt: -1 }).then((result) => {
                 toolResults = result;
-                res.render('index', { parts: partResults, tools: toolResults, services:serviceResults, title: 'Automotive Intelligence | Home' });
-
+                res.render('index', {
+                    parts: partResults,
+                    tools: toolResults,
+                    services:serviceResults,
+                    email: req.user.email,
+                    title: 'Automotive Intelligence | Home'
+                });
             }).catch((err) => {
                 console.log(err);
             });

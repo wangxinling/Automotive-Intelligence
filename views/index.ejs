@@ -2,9 +2,9 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "dashboard" }) %>
+        <%- include("./partials/nav.ejs", { username: email, active: "dashboard" }) %>
         <div>
-            <%- include("./dashboard.ejs"),{parts: parts, tools: tools, services:services} %>
+            <%- include("./dashboard.ejs"), { parts: parts, tools: tools, services:services } %>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>

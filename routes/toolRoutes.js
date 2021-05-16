@@ -16,9 +16,8 @@ router.post('/find', toolController.postFindTool);
 router.get('/:id', toolController.getTool);
 router.delete('/:id', toolController.deleteTool);
 
-
-setInterval(toolController.usage, 60000); // every minuter check one time all tools' location
-//setInterval(toolController.usage, 6000); // testing
+// every minuter check one time all tools' location
+setInterval(toolController.getUsage, 60000);
 
 // export router handles
 module.exports = router;

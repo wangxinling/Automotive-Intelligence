@@ -2,7 +2,7 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "tools" }) %>
+        <%- include("./partials/nav.ejs", { username: email, active: "tools" }) %>
         <div class="add content">
             <form action="/tools" method="post">
                 <label for="name">Tool Name:</label>

@@ -41,7 +41,7 @@ const postSignup = (req, res) => {
                 name,
                 email,
                 password,
-            };
+            }
             
             const newUser = new User(user);
 
@@ -77,9 +77,9 @@ const postGoogleLogin = async (req, res) => {
         const user = {
             id: profile.sub,
             name: profile.name,
-            email: profile.email,
-        };
-        console.log(profile);
+            email: profile.email
+        }
+
         // adding google user to the database
         authConfig.addUser(req, user);
         res.redirect("/");
@@ -98,7 +98,7 @@ const postFacebookLogin = async (req, res) => {
             id: profile.id,
             name: profile.name,
             email: profile.email
-        };
+        }
     
         // adding facebook user to the database
         authConfig.addUser(req, user);

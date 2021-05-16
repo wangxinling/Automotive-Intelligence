@@ -4,18 +4,28 @@ const Tool = require('../models/toolModel');
 /// tool controllers
 // get add tool page
 const getAddTool = (req, res) => {
-    res.render('addTool', { title: 'Add a new tool' });
+    res.render('addTool', {
+        email: req.user.email,
+        title: 'Add a new tool'
+    });
 }
 
 // get find tool page
 const getFindTool = (req, res) => {
-    res.render('findTool', { title: 'Find a tool' });
+    res.render('findTool', {
+        email: req.user.email,
+        title: 'Find a tool'
+    });
 }
 
 // get all tools from database
 const getAllTools = (req, res) => {
     Tool.find().sort({ createdAt: -1 }).then((result) => {
-        res.render('tools', { tools: result, title: 'Automotive Intelligence | Tools' });
+        res.render('tools', {
+            tools: result,
+            email: req.user.email,
+            title: 'Automotive Intelligence | Tools'
+        });
     }).catch((err) => {
         console.log(err);
     });
@@ -44,7 +54,11 @@ const postAddTool = (req, res) => {
 const postFindTool = (req, res) => {
     const tool = req.body.search;
     Tool.find({ "name": { $regex: ".*" + tool + ".*" } }).then((result) => {
-        res.render('findTool', { list: result, tool, title: 'Find a tool' });
+        res.render('findTool', {
+            tool,
+            list: result,
+            email: req.user.email,
+            title: 'Find a tool' });
     }).catch((err) => {
         console.log(err);
     });
@@ -54,7 +68,11 @@ const postFindTool = (req, res) => {
 const getTool = (req, res) => {
     const id = req.params.id;
     Tool.findById(id).then((result) => {
-        res.render('toolDetails', { tool: result, title: 'Tool Details' });
+        res.render('toolDetails', {
+            tool: result,
+            email: req.user.email,
+            title: 'Tool Details'
+        });
     }).catch((err) => {
         console.log(err);
         res.render('404', { title: 'Page not found' });
@@ -72,7 +90,7 @@ const deleteTool = (req, res) => {
 }
 
 //  every minuter check one time all tools' location
-const usage = () => {
+const getUsage = () => {
     Tool.find().sort({ createdAt: -1 }).then((result) => {
         result.forEach(tool => {
             // if the tool's location is changed then add 1 time usage
@@ -83,23 +101,20 @@ const usage = () => {
                 tool.usageNum += 1;
                 tool.oldLocation = tool.location;
                 Tool.updateOne({ _id: tool._id }, { usageNum: tool.usageNum, oldLocation: tool.oldLocation }).then((result) => {
-                    console.log(`update object`);
+                    console.log(`Updated object`);
                 }).catch((err) => {
                     console.log(err);
                 });
             }
-            else
-            {
-                //console.log(`doesn't neet to update object`);
+            else {
+                //console.log(`Doesn't neet to update object`);
             }
-
         });
 
     }).catch((err) => {
         console.log(err);
     });
 }
-
 
 // export tool controllers
 toolController = {
@@ -110,6 +125,6 @@ toolController = {
     postFindTool,
     getTool,
     deleteTool,
-    usage
+    getUsage
 }
 module.exports = toolController;

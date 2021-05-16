@@ -40,11 +40,21 @@ const getUserData = async (accessToken) => {
     return userData;
 }
 
+exports.ensureAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.redirect('/users/login');
+}
+
 exports.addUser = (req, user) => {
     User.findOne({ email: user.email }).then((dbUser) => {
         if (dbUser) {
-            req.user = dbUser;
-            req.session.passport = { user: dbUser.id };
+            req.login(dbUser, (err) => {
+                if(err) return next(err);
+            });
+
             console.log("This user already exists");
             console.log(req.user);
             console.log(req.session);
@@ -52,8 +62,8 @@ exports.addUser = (req, user) => {
             dbUser = {
                 name: user.name,
                 email: user.email,
-                password: user.id,
-            };
+                password: user.id
+            }
 
             const newUser = new User(dbUser);
 
@@ -63,14 +73,14 @@ exports.addUser = (req, user) => {
                     newUser.password = hash;
         
                     newUser.save().then((user) => {
-                        req.user = user;
-                        req.session.passport = { user: user.id };
+                        req.login(user, (err) => {
+                            if(err) return next(err);
+                        });
+                        
                         console.log("User has been added to the database");
-        
                         console.log(req.user);
                         console.log(req.session);
-                    })
-                    .catch((err) => {
+                    }).catch((err) => {
                         console.log(err);
                     });
                 });

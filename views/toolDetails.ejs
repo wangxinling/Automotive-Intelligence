@@ -2,7 +2,7 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "tools" }) %>
+        <%- include("./partials/nav.ejs", { username: email, active: "tools" }) %>
         <div class="details content">
             <h2><%= `${tool.type} ${tool.name}, Size ${tool.size}` %></h2>
             <div class="row" <%- tool.available ? "style='border-left-color: darkcyan'" : "" %>>
@@ -11,22 +11,8 @@
                 <p><label>Longitude : </label><label><%= tool.location.coordinates[0] %></label></p>
                 <p><label>Latitude : </label><label><%= tool.location.coordinates[1] %></label></p>
             </div>
-            <a class="delete" data-id="<%= tool.id %>"><i class="fa fa-trash"></i></a>
+            <a class="delete" onclick="deleteItem();" data-id="<%= tool.id %>"><i class="fa fa-trash"></i></a>
         </div>
         <%- include("./partials/footer.ejs") %>
-        <script>
-            const trash = document.querySelector('a.delete');
-
-            trash.addEventListener('click', (event) => {
-                const endpoint = `/tools/${trash.dataset.id}`;
-
-                fetch(endpoint, {
-                    method: 'delete',
-                })
-                .then(response => response.json())
-                .then(data => window.location.href = data.redirect)
-                .catch(err => console.log(err));
-            });
-        </script>
     </body>
 </html>

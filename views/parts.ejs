@@ -2,7 +2,7 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "parts" }) %>
+        <%- include("./partials/nav.ejs", { username: email, active: "parts" }) %>
         <div class="default content">
             <h2>All Parts</h2>
             <% if (parts.length > 0) { %>

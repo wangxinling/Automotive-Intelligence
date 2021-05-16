@@ -2,7 +2,7 @@
 <html lang="en">
     <%- include("./partials/head.ejs") %>
     <body>
-        <%- include("./partials/nav.ejs", { active: "parts" }) %>
+        <%- include("./partials/nav.ejs", { username: email, active: "parts" }) %>
         <div class="find content">
             <form class="search" action="/parts/find" method="post">
                 <input type="text" name="search" placeholder="Search.." required>
