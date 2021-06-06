@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include("./partials/head.ejs") %>
+
     <body>
+        
         <%- include("./partials/nav.ejs", { username: email, active: "services" }) %>
         <div class="details content">
             <h2>Job Card</h2>
@@ -16,5 +18,5 @@
             </div>
         </div>
         <%- include("./partials/footer.ejs") %>
-    </body>
+         </body>
 </html>

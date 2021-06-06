@@ -1052,4 +1052,95 @@ figure {
 		margin-right: 0px;
 		margin-bottom: 10px;
 	}
+
+	 .add form{
+                max-width: 80%;
+            }
+            .row1 .label input{
+                width: 100%;
+            }
+            .row1,.row2{
+                display:flex;
+                justify-content: space-between;
+            }
+            .tyre td{
+                width: 100px;
+            }
+            .tyre th{
+                width: 100px;
+                display: flex;
+                align-items: center;
+            }
+            .tyre th h4{
+                width: 100%;
+                text-align: center;
+            }
+            .flex{
+                display: flex;
+            }
+            .tyre input[type="checkbox"],.depth{
+                width: auto;
+                margin: 0 10px;
+            }
+            .depth {
+                outline: none;
+                border:none;
+                border-bottom: 1px solid black;
+                max-width:30px!important;
+                margin-bottom: 20px!important;
+                
+            }
+            .tdepth td{
+                  padding: 0 30px;
+            }
+            .add fieldset{
+                width: 100%;
+                margin: 20px 20px 20px 0;
+            } 
 }
+
+
+            .add form{
+                max-width: 80%;
+            }
+            .row1 .label input{
+                width: 100%;
+            }
+            .row1,.row2{
+                display:flex;
+                justify-content: space-between;
+            }
+            .tyre td{
+                width: 100px;
+            }
+            .tyre th{
+                width: 100px;
+                display: flex;
+                align-items: center;
+            }
+            .tyre th h4{
+                width: 100%;
+                text-align: center;
+            }
+            .flex{
+                display: flex;
+            }
+            .tyre input[type="checkbox"],.depth{
+                width: auto;
+                margin: 0 10px;
+            }
+            .depth {
+                outline: none;
+                border:none;
+                border-bottom: 1px solid black;
+                max-width:30px!important;
+                margin-bottom: 20px!important;
+                
+            }
+            .tdepth td{
+                  padding: 0 30px;
+            }
+            .add fieldset{
+                width: 100%;
+                margin: 20px 20px 20px 0;
+            } 

@@ -1,25 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("./partials/head.ejs") %>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        <!-- css -->
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="/css/icon.css">
+        <!-- js --->
+        <script type="text/javascript" src="/js/script.js" ></script>
+        <title><%= title %></title>
+    </head>
     <body>
+        
         <%- include("./partials/nav.ejs", { username: email, active: "service" }) %>
         <div class="add content">
             <form action="/services/add" method="post">
-                <label for="client">Client Name:</label>
-                <input type="text" id="client" name="client" placeholder="Enter Client" required>
-                <label for="regoNum">Rego Number:</label>
-                <input type="text" id="regoNum" name="regoNum" placeholder="Enter Rego Number" required>
-                <label for="make">Vehicle Make:</label>
-                <input type="text" id="make" name="make" placeholder="Enter Vehicle Make" required>
-                <label for="model">Vehicle Model:</label>
-                <input type="text" id="model" name="model" placeholder="Enter Vehicle Model" required>
-                <label for="year">Manufactured Year:</label>
-                <input type="text" id="year" name="year" placeholder="Enter Manufactured Year" required>
-                <label for="odo">Odometer Reading:</label>
-                <input type="text" id="odo" name="odo" placeholder="Enter Odometer Reading" required>
-                <button>Add Service</button>
+                <div class="row1">
+                    <div class="label">
+                        <label for="job_num">Job no:</label>
+                        <input type="text" id="job_num" name="job_num" placeholder="Enter Job number" required>
+                    </div>
+                    <div class="label">
+                        <label for="job_date">Job Date:</label>
+                        <input type="text" id="job_date" name="job_date" placeholder="Enter Client" required>
+                    </div>
+                    <div class = "label">
+                        <label for="regoNum">Rego Number:</label>
+                        <input type="text" id="regoNum" name="regoNum" placeholder="Enter Rego Number" required>
+                    </div>
+                </div>
+                <div class="row1">
+                    <div class="label">
+                        <label for="timein">Time in:</label>
+                        <input type="text" id="timein" name="timein" placeholder="Enter Client" required>
+                    </div>
+                    <div class="label">
+                        <label for="carmake">Car Make:</label>
+                        <input type="text" id="carmake" name="carmake" placeholder="Enter Car Make" required>
+                    </div>
+                    <div class = "label">
+                        <label for="carmodel">Car Model:</label>
+                        <input type="text" id="carmodel" name="carmodel" placeholder="Enter Car Model" required>
+                    </div>
+                </div>
+                <div class="row2">
+                    <div class="label">
+                        <label for="clientname">Client Name:</label>
+                        <input type="text" id="clientname" name="clientname" placeholder="Enter Client" required>
+                    </div>
+                    <div class="label">
+                        <label for="contactnumber">Contact Number:</label>
+                        <input type="text" id="contactnumber" name="contactnumber" placeholder="Enter Contact" required>
+                    </div>
+                    <div class = "label">
+                        <label for="engine"> Engine No:</label>
+                        <input type="text" id="engine" name="engine" placeholder="Enter Engine.No" required>
+                    </div>
+                    <div class = "label">
+                        <label for="vin"> VIN No:</label>
+                        <input type="text" id="vin" name="vin" placeholder="Enter VIN.No" required>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend><b>Tyre Condition</b></legend>
+                    <table class="tyre">
+                        <tr>
+                            <th><h4>Tyre</h4></th>
+                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="new" id="new"><p>New</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="excellent" id="excellent"><p>Excellent</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="good" id="good"><p>Good</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="fair" id="fair"><p>Fair</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="poor" id="poor"><p>Poor</p></label></td>
+                        </tr>
+                        <tr class="tdepth">
+                            <th><h4>Tyre Depth</h4></th>
+                            <td><label style="display: flex; align-items: center;"><p>FLS</p><input type="text" name="fls" class="depth" id="fls"><p>mm</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><p>FRS</p><input type="text" name="frs" class="depth" id="frs"><p>mm</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><p>BLS</p><input type="text" name="bls" class="depth" id="bls"><p>mm</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><p>BRS</p><input type="text" name="brs" class="depth" id="brs"><p>mm</p></label></td>
+                            
+                        </tr>
+                        
+                    </table>
+                    
+                </fieldset>
+                <div class = "row1">
+                    <div >
+                        <label for="tech">Technician Name:</label>
+                        <input type="text" id="tech" name="tech" placeholder="Enter Client" required>
+                        
+                    </div>
+                    <div>
+                        <label for="techid">Technician ID:</label>
+                        <input type="text" id="techid" name="techid" placeholder="Enter Rego Number" required>
+                        
+                    </div>
+                    <div>
+                        <label for="odo">Odometer Reading:</label>
+                        <input type="text" id="odo" name="odo" placeholder="Enter Odometer Reading" required>
+                        
+                    </div>
+                   
+
+                </div>
+                <div style="width: 100%;display: flex;justify-content: center; margin-top: 20px;"><button>Add Service</button>
+            </div>
             </form>
         </div>
         <%- include("./partials/footer.ejs") %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="undefined" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="undefined" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.esm.min.js" integrity="undefined" crossorigin="anonymous"></script>
+   
     </body>
 </html>
