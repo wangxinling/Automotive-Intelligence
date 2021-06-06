@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <div class="add content">
+           
+            <button id="scanButton">Scan</button>
+            <button id="writeButton">Write</button>
+            <p id="nfcState"></p>
+        </div>
+
+    </body>
+    <script>
+        if (!("NDEFReader" in window))
+        {
+            document.getElementById("nfcState").innerHTML = "This page only support on Google Chrome Browser on Andriod device."
+        }
+        scanButton.addEventListener("click", async () => {
+            nfcState.innerHTML = "User clicked scan button";
+
+            try {
+                const ndef = new NDEFReader();
+                await ndef.scan();
+                nfcState.innerHTML = "Scan started";
+
+                ndef.addEventListener("readingerror", () => {
+                    nfcState.innerHTML ="Cannot read data from the NFC tag. Try another one?";
+                });
+
+                ndef.addEventListener("reading", ({ message, serialNumber }) => {
+                    nfcState.innerHTML +=`> Serial Number: ${serialNumber}`;
+                    nfcState.innerHTML +=`> Records: (${message.records.length})`;
+                    const decoder = new TextDecoder();
+                    for (const record of message.records) {
+                    switch (record.recordType) {
+                        case "text":
+                        const textDecoder = new TextDecoder(record.encoding);
+                        nfcState.innerHTML +=`Text: ${textDecoder.decode(record.data)} (${record.lang})`;
+                        sendData(serialNumber);
+                        break;
+                        case "url":
+                        nfcState.innerHTML +=`URL: ${decoder.decode(record.data)}`;
+                        break;
+                        case "mime":
+                        if (record.mediaType === "application/json") {
+                            nfcState.innerHTML +=`JSON: ${JSON.parse(decoder.decode(record.data))}`;
+                        }
+                        else if (record.mediaType.startsWith("image/")) {
+                            const blob = new Blob([record.data], { type: record.mediaType });
+
+                            const img = document.createElement("img");
+                            img.src = URL.createObjectURL(blob);
+                            img.onload = () => window.URL.revokeObjectURL(this.src);
+
+                            document.body.appendChild(img);
+                        }
+                        else {
+                            nfcState.innerHTML +=`Media not handled`;
+                        }
+                        break;
+                        default:
+                        nfcState.innerHTML +=`Record not handled`;
+                    }
+                    }
+                });
+            } catch (error) {
+                nfcState.innerHTML ="Argh! " + error;
+            }
+        });
+
+        writeButton.addEventListener("click", async () => {
+
+            try {
+                const ndef = new NDEFReader();
+                ndef.write({
+                records: [{ recordType: "text", data: "screwdriver"}]
+                }).then(() => {
+                    nfcState.innerHTML = "Message written.";
+                }).catch(error => {
+                    nfcState.innerHTML =`Write failed :-( try again: ${error}.`;
+                });
+
+            } catch (error) {
+                log("Argh! " + error);
+            }
+        });
+
+        function sendData(tagID){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    nfcState.innerHTML = "Successful!"
+                }
+            };
+            xhttp.open("GET", "/nfc/setTag/"+ tagID, true);
+            nfcState.innerHTML = "Get "+tagID+"!";
+            xhttp.send();  
+        }
+    </script>
+</html>
