@@ -3,21 +3,18 @@
     <%- include("./partials/head.ejs") %>
     <body>
         <%- include("./partials/nav.ejs", { username: email, active: "services" }) %>
-        <div class="find content">
-            <form class="search" action="/services" method="post">
-                <input type="text" name="search" placeholder="Search.." required>
-	            <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-            <ul class="search-list">
-                <% if (locals.list && list.length > 0) { %>
-                    <% list.forEach(vehicle => { %>
-                        <li><a href="/services/<%= vehicle.id %>"><%= `${vehicle.regoNum} | ${vehicle.year} ${vehicle.make} ${vehicle.model}` %></a></li>
-                    <% }) %>
-                <% } else if (locals.list) { %>
-                    <p>Congrats! '<%= regoNum %>' is a new vehicle. Click below to add a new job card..</p>
-                    <a href="/services/add"><button>New Service</button></a>
-                <% } %>
-            </ul>
+        <div class="default content">
+            <h2>All Services</h2>
+            <% if (vehicles.length > 0) { %>
+                <% vehicles.forEach(vehicle => {  %>
+                    <a class="row" href="/services/<%= vehicle.id %>"  style='border-left-color: darkcyan;'>
+                        <h3><%= `${vehicle.carmake} ${vehicle.carmodel}, JobNo ${vehicle.job_num}` %></h3>
+                        
+                    </a>
+                <% }) %>
+            <% } else { %>
+                <p>There are no vehicles to display...</p>
+            <% } %>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>

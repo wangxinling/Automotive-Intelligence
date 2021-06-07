@@ -21,13 +21,21 @@ const getAddService = (req, res) => {
     });
 }
 
+//find a service
+const getFindService = (req, res) => {
+    console.log(req)
+    res.render('findServices', {
+        email: req.user.email,
+        title: 'Automotive Intelligence | Find a service'
+    });
+}
 // find veficle rego from database
 const postFindService = (req, res) => {
     const regoNum = req.body.search;
     Service.find({ "regoNum": { $regex: ".*" + regoNum + ".*" } }).then((result) => {
-        res.render('services', {
+        res.render('findServices', {
             email: req.user.email,
-            list: result,
+            vehicle: result,
             regoNum, title: 'Automotive Intelligence | Services'
         });
     }).catch((err) => {
@@ -35,17 +43,41 @@ const postFindService = (req, res) => {
     });
 }
 
+const getAllService = (req, res) =>{
+    Service.find().sort({ createdAt: -1 }).then((result) => {
+        res.render('services', {
+            
+            'vehicles': result,
+            'email': req.user.email,
+            'title': 'Automotive Intelligence | Services'
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 // add a service to the database
 const postAddService = (req, res) => {
     const id = mongoose.Types.ObjectId();
     const service = new Service({
         _id: id,
-        client : req.body.client,
-        regoNum : req.body.regoNum,
-        make : req.body.make,
-        model: req.body.model,
-        year: req.body.year,
-        odo: req.body.odo
+        job_num:req.body.job_num,
+        job_date:req.body.job_date,
+        regoNum:req.body.regoNum,
+        timein:req.body.timein,
+        carmake:req.body.carmake,
+        carmodel:req.body.carmodel,
+        clientname:req.body.clientname,
+        contactnumber:req.body.contactnumber,
+        engine:req.body.engine,
+        vin:req.body.vin,
+        review:req.body.review,
+        fls:req.body.fls,
+        frs:req.body.frs,
+        bls:req.body.bls,
+        brs:req.body.brs,
+        tech:req.body.tech,
+        techid:req.body.techid,
+        odo:req.body.odo,
     });
     service.save().then((result) => {
         res.redirect('/services/' + id.toString());
@@ -69,12 +101,16 @@ const getServiceDetails = (req, res) => {
     });
 }
 
+
+
 // export service controllers
 serviceController = {
     getService,
     getAddService,
     postFindService,
     postAddService,
-    getServiceDetails
+    getServiceDetails,
+    getFindService,
+    getAllService,
 }
 module.exports = serviceController;

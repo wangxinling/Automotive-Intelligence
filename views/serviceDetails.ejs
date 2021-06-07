@@ -8,13 +8,27 @@
         <div class="details content">
             <h2>Job Card</h2>
             <div class="row" style="border-left-color: darkcyan">
-                <p><label>Client: </label><label><%= vehicle.client %></label></p>
-                <p><label>Rego Number: </label><label><%= vehicle.regoNum %></label></p>
-                <p><label>Make : </label><label><%= vehicle.make %></label></p>
-                <p><label>Model : </label><label><%= vehicle.model %></label></p>
-                <p><label>Year: </label><label><%= vehicle.year %></label></p>
+                <p><label>Job Number: </label><label><%= vehicle.job_num %></label></p>
+                <p><label>Job Date: </label><label><%= vehicle.job_date %></label></p>
+                <p><label>Rego Number : </label><label><%= vehicle.regoNum %></label></p>
+                <p><label>In Time : </label><label><%= vehicle.timein %></label></p>
+                <p><label>Make: </label><label><%= vehicle.carmake %></label></p>
+                <p><label>Model: </label><label><%= vehicle.carmodel %></label></p>
+                <p><label>Client: </label><label><%= vehicle.clientname %></label></p>
+                <p><label>Contact: </label><label><%= vehicle.contactnumber %></label></p>
+                <p><label>Engine No: </label><label><%= vehicle.engine %></label></p>
+                <p><label>Vin No: </label><label><%= vehicle.vin %></label></p>
+                <p><label>Tyre Condition: </label><label><%= vehicle.review %></label></p>
+                <p><label>FLS: </label><label><%= vehicle.fls %></label></p>
+                <p><label>FRS: </label><label><%= vehicle.frs %></label></p>
+                <p><label>BLS: </label><label><%= vehicle.bls %></label></p>
+                <p><label>BRS: </label><label><%= vehicle.brs %></label></p>
+                <p><label>Technician Name: </label><label><%= vehicle.tech %></label></p>
+                <p><label>Technician ID: </label><label><%= vehicle.techid %></label></p>
                 <p><label>Odometer: </label><label><%= vehicle.odo %></label></p>
-                <p><label>Date: </label><label><%= vehicle.date.toString().substring(4,24) %></label></p>
+           
+            
+            
             </div>
         </div>
         <%- include("./partials/footer.ejs") %>

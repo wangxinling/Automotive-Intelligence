@@ -24,7 +24,7 @@
                     </div>
                     <div class="label">
                         <label for="job_date">Job Date:</label>
-                        <input type="text" id="job_date" name="job_date" placeholder="Enter Client" required>
+                        <input type="date" id="job_date" name="job_date" placeholder="Enter Client" required>
                     </div>
                     <div class = "label">
                         <label for="regoNum">Rego Number:</label>
@@ -34,7 +34,7 @@
                 <div class="row1">
                     <div class="label">
                         <label for="timein">Time in:</label>
-                        <input type="text" id="timein" name="timein" placeholder="Enter Client" required>
+                        <input type="time" id="timein" name="timein" placeholder="Enter Intime" required>
                     </div>
                     <div class="label">
                         <label for="carmake">Car Make:</label>
@@ -68,11 +68,11 @@
                     <table class="tyre">
                         <tr>
                             <th><h4>Tyre</h4></th>
-                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="new" id="new"><p>New</p></label></td>
-                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="excellent" id="excellent"><p>Excellent</p></label></td>
-                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="good" id="good"><p>Good</p></label></td>
-                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="fair" id="fair"><p>Fair</p></label></td>
-                            <td><label style="display: flex; align-items: center;"><input type="checkbox" name="poor" id="poor"><p>Poor</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="radio" name="review" id="new"><p>New</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="radio" name="review" id="excellent"><p>Excellent</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="radio" name="review" id="good"><p>Good</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="radio" name="review" id="fair"><p>Fair</p></label></td>
+                            <td><label style="display: flex; align-items: center;"><input type="radio" name="review" id="poor"><p>Poor</p></label></td>
                         </tr>
                         <tr class="tdepth">
                             <th><h4>Tyre Depth</h4></th>
@@ -89,12 +89,12 @@
                 <div class = "row1">
                     <div >
                         <label for="tech">Technician Name:</label>
-                        <input type="text" id="tech" name="tech" placeholder="Enter Client" required>
+                        <input type="text" id="tech" name="tech" placeholder="Enter Technician" required>
                         
                     </div>
                     <div>
                         <label for="techid">Technician ID:</label>
-                        <input type="text" id="techid" name="techid" placeholder="Enter Rego Number" required>
+                        <input type="text" id="techid" name="techid" placeholder="Enter Technician ID" required>
                         
                     </div>
                     <div>

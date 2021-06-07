@@ -1125,7 +1125,7 @@ figure {
             .flex{
                 display: flex;
             }
-            .tyre input[type="checkbox"],.depth{
+            .tyre input[type="radio"],.depth{
                 width: auto;
                 margin: 0 10px;
             }
