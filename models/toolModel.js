@@ -43,6 +43,9 @@ const ToolSchema = new Schema({
     usageNum:{
         type: Number,
         default:0
+    },
+    nfcTagID:{
+        type: String
     }
 });
 

@@ -16,9 +16,26 @@
                 <input type="text" id="lng" name="lng" placeholder="Enter Longitude" required>
                 <label for="lat">Latitude:</label>
                 <input type="text" id="lat" name="lat" placeholder="Enter Latitude" required>
+                <label for="nfc">NFC tag ID:</label>
+                <input type="text" id="nfc" name="nfc" placeholder="Enter tag ID">
+                <button id="scanButton" type="button">Scan</button>
                 <button>Add Part</button>
             </form>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>
+    <script>
+        
+        scanButton.addEventListener("click", async () => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    nfc.value = this.responseText;
+                }
+            };
+            xhttp.open("GET", "/nfc/getTag", true);
+            xhttp.send();  
+
+        });
+    </script>
 </html>

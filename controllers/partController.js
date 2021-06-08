@@ -41,7 +41,8 @@ const postAddPart = (req, res) => {
         location : {
             type : 'Point',
             coordinates : [parseFloat(req.body.lng) , parseFloat(req.body.lat)]
-        }
+        },
+        nfcTagID:req.body.nfc
     });
     part.save().then((result) => {
         res.redirect('/parts');

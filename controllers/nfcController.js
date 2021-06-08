@@ -4,14 +4,17 @@ const getNFCManager = (req, res) => {
     });
 }
 const getTagdata = (req, res) => {
-    res.write("mikeWang");
+    res.write(currentTag);
     res.end();
 }
 const setTagdata = (req, res) => {
-    var tagID = req.params.id
-    res.end()
+    currentTag = req.params.id
+    res.end();
 }
 
+var currentTag = "";
+var latitude = "";
+var longitude = "";
 
 // export controllers
 nfcController = {

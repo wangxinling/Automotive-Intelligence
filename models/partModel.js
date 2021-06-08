@@ -35,6 +35,9 @@ const PartSchema = new Schema({
     location: {
         type: GeoSchema,
         require: true
+    },
+    nfcTagID:{
+        type: String
     }
 });
 

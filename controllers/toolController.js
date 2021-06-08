@@ -41,7 +41,8 @@ const postAddTool = (req, res) => {
         location: {
             type: 'Point',
             coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)]
-        }
+        },
+        nfcTagID:req.body.nfc
     });
     tool.save().then((result) => {
         res.redirect('/tools');
