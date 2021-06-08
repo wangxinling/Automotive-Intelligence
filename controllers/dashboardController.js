@@ -3,7 +3,6 @@ const Part = require('../models/partModel');
 const Service = require('../models/serviceModel');
 const Tool = require('../models/toolModel');
 
-
 // get all parts from database
 const getAllDashboard = (req, res) => {
     let partResults;

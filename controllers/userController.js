@@ -69,44 +69,32 @@ const getLogout = (req, res) => {
     res.redirect('/users/login');
 }
 
-// authenticate google user
-const postGoogleLogin = async (req, res) => {
+// authenticate social network user
+const postSocialLogin = async (req, res, next) => {
     try {
+        let profile, id = null;
         const code = req.query.code;
-        const profile = await authConfig.getGoogleProfile(code);
+
+        if (req.route.path.split("/")[2] === "google") {
+            profile = await authConfig.getGoogleProfile(code);
+            id = profile.sub;
+        } else {
+            profile = await authConfig.getFacebookProfile(code);
+            id = profile.id;
+        }
+        
         const user = {
-            id: profile.sub,
+            id: id,
             name: profile.name,
             email: profile.email
         }
 
-        // adding google user to the database
-        authConfig.addUser(req, user);
-        res.redirect("/");
+        // adding social network user to the database
+        authConfig.addUser(req, res, next, user);
     } catch (err) {
         console.log(err);
         res.status(401).send();
     }
-}
-
-// authenticate facebook user
-const postFacebookLogin = async (req, res) => {
-    try {
-        const code = req.query.code;
-        const profile = await authConfig.getFacebookProfile(code);
-        const user = {
-            id: profile.id,
-            name: profile.name,
-            email: profile.email
-        }
-    
-        // adding facebook user to the database
-        authConfig.addUser(req, user);
-        res.redirect("/");
-      } catch (err) {
-        console.log(err);
-        res.status(401).send();
-      }
 }
 
 // export user controllers
@@ -116,7 +104,6 @@ userController = {
     postLogin,
     postSignup,
     getLogout,
-    postGoogleLogin,
-    postFacebookLogin
+    postSocialLogin
 }
 module.exports = userController;
