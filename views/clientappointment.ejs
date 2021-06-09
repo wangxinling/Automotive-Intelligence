@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <nav>
+            <div class="title">
+                <a href="/"><h1>Automotive Intelligence</h1></a>
+                <div class="profile">
+                    <p class="username"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;<%= username %></p>
+                    <button class="logout" onclick="logoutUser();">Logout</button>
+                </div>
+                <p>An IoT based smart automotive workshop</p>
+            </div>
+            <div class="navbar">
+                <div><a href="/client" class="" } >Home</a>
+                     
+                </div>
+            <div><a href="/" class="active" } >Book Service</a>
+                     
+                 </div>
+                 <div><a href="/" class="" } >View Service</a>
+                     
+                 </div>
+           </div>
+        </nav>
+        
+        <div class="add content">
+            <form action="" method="post" class="appoint">
+                <label for="name">Name:</label>
+                <input type="text" id="cname" name="cname" placeholder="Enter Your Name" required>
+                <label for="type">Contact Number:</label>
+                <input type="text" id="cnum" name="cnum" placeholder="Enter Contact No" required>
+                <label for="desc">Date of appointment:</label>
+                <input type ="date" id="date" name="date" required placeholder="Enter Description" required>
+                <label for="name" id="loc">Issues Faced:</label>
+                <textarea id="descp" name="descp" placeholder="Enter any identified problems" ></textarea>
+                <label for="lng">Car Make:</label>
+                <input type="text" id="cmake" name="cmake" placeholder="Enter Carmake" required>
+                <label for="lat">Car Model:</label>
+                <input type="text" id="cmodel" name="cmodel" placeholder="Enter Carmodel" required>
+                <div style="width: 100%;display: flex;justify-content: center; margin-top: 20px;"><button>Book Appointment</button>
+                </div>
+            </form>
+        </div>
+    </body>

@@ -14,6 +14,7 @@ const userRoutes = require('./routes/userRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const toolRoutes = require('./routes/toolRoutes');
 const partRoutes = require('./routes/partRoutes');
+const clientRoutes = require('./routes/clientRoutes');
 
 // import controllers
 const dashboardController = require('./controllers/dashboardController');
@@ -98,6 +99,9 @@ app.use('/tools', ensureAuthenticated, toolRoutes);
 
 // part routes
 app.use('/parts', ensureAuthenticated, partRoutes);
+
+//client routes
+app.use('/client',ensureAuthenticated, clientRoutes);
 
 // 404 page
 app.use((req, res) => {
