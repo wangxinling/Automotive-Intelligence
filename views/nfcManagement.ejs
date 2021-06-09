@@ -3,7 +3,6 @@
     <%- include("./partials/head.ejs") %>
     <body>
         <div class="add content">
-           
             <button id="scanButton">Scan</button>
             <button id="writeButton">Write</button>
             <p id="nfcState"></p>
@@ -89,7 +88,7 @@
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    nfcState.innerHTML = "Successful!"
+                    nfcState.innerHTML = "Successful! The tag ID is "+tagID;
                 }
             };
             xhttp.open("GET", "/nfc/setTag/"+ tagID, true);
