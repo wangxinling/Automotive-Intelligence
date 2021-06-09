@@ -55,11 +55,25 @@ const postAddPart = (req, res) => {
 const postFindPart = (req, res) => {
     const part = req.body.search;
     Part.find({ "name": { $regex: ".*" + part + ".*" } }).then((result) => {
-        res.render('findPart', {
-            email: req.user.email,
-            list: result, part,
-            title: 'Find a part'
-        });
+        if(result.length == 0)
+        {
+            Part.find({ "nfcTagID": { $regex: ".*" + part + ".*" } }).then((result) => {
+                res.render('findPart', {
+                    email: req.user.email,
+                    list: result, part,
+                    title: 'Find a part'
+                });
+            })
+        }
+        else
+        {
+            res.render('findPart', {
+                email: req.user.email,
+                list: result, part,
+                title: 'Find a part'
+            });
+        }
+        
     }).catch((err) => {
         console.log(err);
     });

@@ -55,11 +55,25 @@ const postAddTool = (req, res) => {
 const postFindTool = (req, res) => {
     const tool = req.body.search;
     Tool.find({ "name": { $regex: ".*" + tool + ".*" } }).then((result) => {
-        res.render('findTool', {
-            tool,
-            list: result,
-            email: req.user.email,
-            title: 'Find a tool' });
+        if(result.length == 0)
+        {
+            Part.find({ "nfcTagID": { $regex: ".*" + part + ".*" } }).then((result) => {
+                res.render('findTool', {
+                    tool,
+                    list: result,
+                    email: req.user.email,
+                    title: 'Find a tool' });
+            })
+        }
+        else
+        {
+            res.render('findTool', {
+                tool,
+                list: result,
+                email: req.user.email,
+                title: 'Find a tool' });
+        }
+        
     }).catch((err) => {
         console.log(err);
     });
