@@ -237,12 +237,11 @@ textarea {
 .search input {
     display: inline-block;
 	font-size: 14px;
-	width: 80%;
+	width: 60%;
     padding: 8px;
 }
 
 .search button {
-	float: right;
 	width: 15%;
 	padding: 8px;
 	font-size: 18px;
@@ -250,7 +249,7 @@ textarea {
     color: white;
     border: 0;
 	cursor: pointer;
-    border-radius: 0px 2px 2px 0px;
+    border-radius: 2px 2px 2px 2px;
 }
 
 .search button:hover {
