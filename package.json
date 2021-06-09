@@ -20,6 +20,7 @@
   "homepage": "https://github.com/FSocietyLK/Automotive-Intelligence#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^9.0.2",
     "ejs": "^3.1.6",

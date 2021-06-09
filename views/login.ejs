@@ -4,24 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Automotive Intelligence</title>
+    <title><%= title %></title>
 
-    <!-- Font icon -->
-    <link rel="stylesheet" href="/css/material-icon.css">
-
-    <!-- Main css -->
-    <link rel="stylesheet" href="/css/styles.css">
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/material-icon.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
     
-    <!-- Main js -->
+    <!-- js --->
     <script type="text/javascript" src="/js/auth.js"></script>
-
-    <!-- Load google apis -->
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/validate.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    
+    <!-- google apis -->
     <script src="https://apis.google.com/js/platform.js?onload=loadAuthClient" async defer></script>
 </head>
 <body style="background-color: #D9D9D9;">
     <div class="main">
 
-        <!-- Sing in  Form -->
+        <!-- sing in form -->
         <section class="sign">
             <div class="container">
                 <div class="signin-content">
@@ -35,11 +37,17 @@
                         <form method="POST" class="register-form" id="login-form">
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="email" id="email" placeholder="Email"/>
+                                <div class="email-wrapper">
+                                    <input type="text" name="email" id="email" placeholder="Email"/>
+                                </div>
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group">
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="password" id="password" placeholder="Password"/>
+                                <div class="password-wrapper">
+                                    <input type="password" name="password" id="password" placeholder="Password"/>
+                                </div>
+                                <small class="help-block"></small>
                             </div>
                             <div class="form-group">
                                 <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
@@ -50,7 +58,16 @@
                                     Log in
                                 </button>
                             </div>
+                            <div class="form-group">
+                                <a href="#" class="forgot-password">Forgotten password?</a>
+                            </div>
                         </form>
+                        <div class="alert alert-danger alert-dismissible <%= redirect %>" style="display: none;">
+                            <button type="button" class="close" aria-hidden="true">&times;</button>
+                            <span class="message">
+                                <strong>Failed!</strong>The email or password you entered is incorrect. Please check and try gain.
+                            </span>
+                        </div>
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
                             <ul class="socials">

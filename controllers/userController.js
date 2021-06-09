@@ -10,12 +10,20 @@ const authConfig = require('../config/auth');
 /// user controllers
 // get user login page
 const getLogin = (req, res) => {
-    res.render('login', { title: 'Login' });
+    const redirect = req.flash('redirect');
+    res.render('login', { title: 'Login', redirect });
+}
+
+// redirect user login fail
+const getLoginFail = (req, res) => {
+    req.flash("redirect", "login");
+    res.redirect('/users/login');
 }
 
 // get user signup page
 const getSignup = (req, res) => {
-    res.render('signup', { title: 'Register' });
+    const exist = req.flash('exist');
+    res.render('signup', { title: 'Register', exist });
 }
 
 // log in a user
@@ -35,7 +43,8 @@ const postSignup = (req, res) => {
 
     User.findOne({ email: email }).then((user) => {
         if (user) {
-          res.send({ errors: ["Email already exists"] });
+            req.flash("exist", "exist");
+            res.redirect("/users/signup");
         } else {
             user = {
                 name,
@@ -53,14 +62,15 @@ const postSignup = (req, res) => {
                     newUser.save().then((user) => {
                         console.log("User has been added to the database");
                     }).catch((err) => {
-                        console.log(err)
+                        console.log(err);
                     });
                 });
             });
+
+            req.flash("redirect", "signup");
+            res.redirect("/users/login");
         }
     });
-
-    res.redirect("/users/login");
 }
 
 // log out a user
@@ -100,6 +110,7 @@ const postSocialLogin = async (req, res, next) => {
 // export user controllers
 userController = {
     getLogin,
+    getLoginFail,
     getSignup,
     postLogin,
     postSignup,
