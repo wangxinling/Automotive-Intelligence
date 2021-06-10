@@ -1,29 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("./partials/head.ejs") %>
-  
+    <%- include("./partials/clientHead.ejs") %>
     <body>
-        <nav>
-            <div class="title">
-                <a href="/"><h1>Automotive Intelligence</h1></a>
+        <%- include("./partials/clientNav.ejs", { active: "home" }) %>
+        <div style="display: flex;justify-content: center;width: 100%;margin-bottom: 50px;"><a href="/booking" style ="background-color: crimson; padding: 10px;">Make Appointment</a></div>
+        <div>
+            <div class="page-wrapper">
+                <!-- Main Header-->
+                <header class="main-header">
+                    
+                    <!-- Header Top -->
+                    <div class="header-top">
+                        <div class="auto-container">
+                            <div class="top-outer clearfix"> 
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Header Top End -->
+                </header>
+                <!--End Main Header -->
                 
-                <p>An IoT based smart automotive workshop</p>
+                <!--Services Section-->
+                <section class="services-section" style="background-image:url(/images/resource/image-1.png);margin-top: 100px;">
+                    <div class="auto-container" >
+                        
+                        <!--Upper Section-->
+                        <div class="upper-section">
+                            <div class="row clearfix">
+                                
+                                <!--Services Block-->
+                                <div class="services-block col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                        <div class="content">
+                                            <div class="image">
+                                                <img src="/images/resource/service-1.jpg" alt="" />
+                                                
+                                            </div>
+                                            <h3><a href="">Full Service</a></h3>
+                                            <div class="text">We make full car service. </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!--Services Block-->
+                                <div class="services-block col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                        <div class="content">
+                                            <div class="image">
+                                                <img src="/images/resource/service-2.jpg" alt="" />
+                                                
+                                            </div>
+                                            <h3><a href="">AC Repair</a></h3>
+                                            <div class="text">We concern your car air flow. </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!--Services Block-->
+                                <div class="services-block col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                        <div class="content">
+                                            <div class="image">
+                                                <img src="/images/resource/service-3.jpg" alt="" />
+                                                
+                                            </div>
+                                            <h3><a href="">Oil Change</a></h3>
+                                            <div class="text">We use first quality products. </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                        <!--Lower Section-->
+                        <div class="lower-section">
+                            <div class="row clearfix">
+                                
+                                <!--Image Column-->
+                                <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                                    <div class="inner-column">
+                                        <div class="image">
+                                            <img src="/images/resource/car.jpg" alt="" />
+                                            <span class="icon"><img src="/images/resource/duty.png" alt="" /></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!--Content Column-->
+                                <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                                    <div class="inner-column">
+                                        <h2>Don’t Let Your car Leak Oil, Make It Sweat Horse Power!</h2>
+                                        <h3>If It Runs On Diesel/Petrol …We’ll Fix It!</h3>
+                                        <div class="text">We care your car completely from top to bottom. </div>
+                                        <a href="" class="theme-btn btn-style-two">Read more</a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                <!--End Services Section-->
+
+                <!--Services Section Two-->
+                <section class="services-section-two">
+                    <div class="auto-container">
+                        <div class="row clearfix">
+                        
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-car"></span>
+                                    </div>
+                                    <h3><a href="services.html">Full Service</a></h3>
+                                    <div class="text">We make A-Z service</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-pressure"></span>
+                                    </div>
+                                    <h3><a href="services.html">Tire Balance</a></h3>
+                                    <div class="text">Tire balance everything.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-plumber"></span>
+                                    </div>
+                                    <h3><a href="services.html">Oil Change</a></h3>
+                                    <div class="text">Perfect oil is good meal of your car.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="900ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-tools-2"></span>
+                                    </div>
+                                    <h3><a href="services.html">AC Repair</a></h3>
+                                    <div class="text">Fresh air makes you chill.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-car-repair"></span>
+                                    </div>
+                                    <h3><a href="services.html">Full Service</a></h3>
+                                    <div class="text">We make A-Z service.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="300ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-tyre"></span>
+                                    </div>
+                                    <h3><a href="services.html">Tire Balance</a></h3>
+                                    <div class="text">Good balance makes a safe ride.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="600ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-diesel"></span>
+                                    </div>
+                                    <h3><a href="services.html">Oil Change</a></h3>
+                                    <div class="text">Perfcet change keeps your vehicle perfect.</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Services Block Two -->
+                            <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="900ms" data-wow-duration="1500ms">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-battery"></span>
+                                    </div>
+                                    <h3><a href="services.html">AC Repair</a></h3>
+                                    <div class="text">Fresh air makes you fresh</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+                <!--End Services Section Two-->
+
+                <!--Expert Section-->
+                <section class="expert-section">
+                    <div class="auto-container">
+                        <!--Sec Title-->
+                        <div class="sec-title centered">
+                            <h2>Our Team of Experts</h2>
+                            <div class="text">If It Runs On Diesel…We’ll Fix It!</div>
+                        </div>
+                        
+                        <div class="row clearfix">
+                            
+                            <!--Team Block-->
+                            <div class="team-block col-lg-4 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="image">
+                                        <a href="team.html"><img src="/images/resource/team-1.jpg" alt="" /></a>
+                                    </div>
+                                    <div class="lower-content">
+                                        <h3><a href="team.html">Jacob Reyes</a></h3>
+                                        <div class="designation">Master Technician</div>
+                                        <div class="text">This is Photoshop's version  of Lorem]psukroin nibh vel velit auctor aliquet.</div>
+                                        <a href="team.html" class="theme-btn btn-style-two">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--Team Block-->
+                            <div class="team-block col-lg-4 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="image">
+                                        <a href="#"><img src="/images/resource/team-2.jpg" alt="" /></a>
+                                    </div>
+                                    <div class="lower-content">
+                                        <h3><a href="team.html">Jacob Reyes</a></h3>
+                                        <div class="designation">Master Technician</div>
+                                        <div class="text">This is Photoshop's version  of Lorem]psukroin nibh vel velit auctor aliquet.</div>
+                                        <a href="team.html" class="theme-btn btn-style-two">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!--Team Block-->
+                            <div class="team-block col-lg-4 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="image">
+                                        <a href="#"><img src="/images/resource/team-3.jpg" alt="" /></a>
+                                    </div>
+                                    <div class="lower-content">
+                                        <h3><a href="team.html">Jacob Reyes</a></h3>
+                                        <div class="designation">Master Technician</div>
+                                        <div class="text">This is Photoshop's version  of Lorem]psukroin nibh vel velit auctor aliquet.</div>
+                                        <a href="team.html" class="theme-btn btn-style-two">read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </section>
+                <!--End Expert Section-->
+                
+                <!--Clients Section-->
+                <section class="clients-section">
+                    <div class="auto-container">
+                        
+                        <div class="sponsors-outer">
+                            <!--Sponsors Carousel-->
+                            <ul class="sponsors-carousel owl-carousel owl-theme">
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                                <li class="slide-item"><figure class="image-box"><a href="#"></a></figure></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </section>
+                <!--End Clients Section-->
             </div>
-            <div class="navbar">
-                <div><a href="/home" class="active" } >Home</a>
-                     
-                </div>
-            <div><a href="/form" class="" } >Book Service</a>
-                     
-                 </div>
-                 <div><a href="/" class="" } >View Service</a>
-                     
-                 </div>
-           </div>
-        </nav>
-        <div style="display: flex;justify-content: center;width: 100%;margin-bottom: 50px;"><a href="/form" style ="background-color: crimson; padding: 10px;">Make Appointment</a></div>
-        <iframe  src="html/clients.html"  style="width: 100%; height: 800px;border: none;overflow: hidden;" title="Iframe Example"></iframe>
+            <!--End pagewrapper-->
+        
+            <script src="/js/jquery.js"></script>
+            <script src="/js/popper.min.js"></script>
+            <script src="/js/bootstrap.min.js"></script>
+            <script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+            <script src="/js/jquery.fancybox.js"></script>
+            <script src="/js/appear.js"></script>
+            <script src="/js/owl.js"></script>
+            <script src="/js/wow.js"></script>
+            <script src="/js/jquery-ui.js"></script>
+            <!--Google Map APi Key-->
+            <script src="https://maps.google.com/maps/api/js?key=AIzaSyBg0VrLjLvDLSQdS7hw6OfZJmvHhtEV_sE"></script>
+            <script src="/js/map-script.js"></script>
+        </div>
         <%- include("./partials/footer.ejs") %>
     </body>
 </html>
-        

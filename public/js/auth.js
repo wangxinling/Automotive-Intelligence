@@ -29,7 +29,7 @@ function socialLogin(id) {
         params = {
             'client_id': GOOGLE_CLIENT_ID,
             'redirect_uri': GOOGLE_REDIRECT_URI,
-            'scope': 'https://www.googleapis.com/auth/userinfo.profile',
+            'scope': 'https://www.googleapis.com/auth/userinfo.email',
             'include_granted_scopes': 'true',
             'response_type': 'code'
         }

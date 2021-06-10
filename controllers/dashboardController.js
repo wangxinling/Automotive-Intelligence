@@ -4,7 +4,7 @@ const Service = require('../models/serviceModel');
 const Tool = require('../models/toolModel');
 
 // get all parts from database
-const getAllDashboard = (req, res) => {
+const getDashboard = (req, res) => {
     let partResults;
     let serviceResults;
     let toolResults;
@@ -34,6 +34,6 @@ const getAllDashboard = (req, res) => {
 
 // export controllers
 dashboardController = {
-    getAllDashboard
+    getDashboard
 };
 module.exports = dashboardController;

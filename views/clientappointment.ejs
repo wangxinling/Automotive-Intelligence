@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include("./partials/head.ejs") %>
+    <%- include("./partials/clientHead.ejs") %>
     <body>
-        <nav>
-            <div class="title">
-                <a href="/"><h1>Automotive Intelligence</h1></a>
-               
-                <p>An IoT based smart automotive workshop</p>
-            </div>
-            <div class="navbar">
-                <div><a href="/home" class="" } >Home</a>
-                     
-                </div>
-            <div><a href="/" class="active" } >Book Service</a>
-                     
-                 </div>
-                 <div><a href="/" class="" } >View Service</a>
-                     
-                 </div>
-           </div>
-        </nav>
-        
+        <%- include("./partials/clientNav.ejs", { active: "booking" }) %>
         <div class="add content">
             <form action="" method="post" class="appoint">
                 <label for="name">Name:</label>
                 <input type="text" id="cname" name="cname" placeholder="Enter Your Name" required>
                 <label for="type">Contact Number:</label>
-                <input type="text" id="cnum" name="cnum" placeholder="Enter Contact No" required>
+                <input type="text" id="cnum" name="cnum" placeholder="Enter Contact Number" required>
                 <label for="desc">Date of appointment:</label>
                 <input type ="date" id="date" name="date" required placeholder="Enter Description" required>
                 <label for="name" id="loc">Issues Faced:</label>
-                <textarea id="descp" name="descp" placeholder="Enter any identified problems" ></textarea>
+                <textarea id="descp" name="descp" placeholder="Enter Any Identified Problems" ></textarea>
                 <label for="lng">Car Make:</label>
-                <input type="text" id="cmake" name="cmake" placeholder="Enter Carmake" required>
+                <input type="text" id="cmake" name="cmake" placeholder="Enter Car Make" required>
                 <label for="lat">Car Model:</label>
-                <input type="text" id="cmodel" name="cmodel" placeholder="Enter Carmodel" required>
+                <input type="text" id="cmodel" name="cmodel" placeholder="Enter Car Model" required>
                 <div style="width: 100%;display: flex;justify-content: center; margin-top: 20px;"><button>Book Appointment</button>
                 </div>
             </form>
         </div>
+        <%- include("./partials/footer.ejs") %>
     </body>
+</html>

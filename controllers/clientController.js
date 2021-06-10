@@ -1,23 +1,21 @@
-const getclients = (req, res) => {
-     
-        res.render('home', {
-            
-            
-            title: 'Automotive Intelligence | Client'
-        });
-    }
+/// client controllers
+// get client web view
+const getClientView = (req, res) => {
+    res.render('home', {
+        title: 'Automotive Intelligence'
+    });
+}
 
-    const getclientsform = (req, res) => {
-     
-        res.render('clientappointment', {
-            
-            
-            title: 'Automotive Intelligence | Client'
-        });
-    }
+// get client's booking view
+const getClientBooking = (req, res) => {
+    res.render('clientAppointment', {
+        title: 'Automotive Intelligence | Bookings'
+    });
+}
 
+// export client controllers
 clientController = {
-    getclients,
-    getclientsform
+    getClientView,
+    getClientBooking
 };
 module.exports = clientController;

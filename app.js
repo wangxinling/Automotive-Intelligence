@@ -16,9 +16,9 @@ const serviceRoutes = require('./routes/serviceRoutes');
 const toolRoutes = require('./routes/toolRoutes');
 const partRoutes = require('./routes/partRoutes');
 const nfcRoutes = require('./routes/nfcRoutes');
-const clientRoutes = require('./routes/clientRoutes');
 
 // import controllers
+const clientController = require('./controllers/clientController');
 const dashboardController = require('./controllers/dashboardController');
 
 // import authenticate user cofig
@@ -60,10 +60,8 @@ app.set('view engine', 'ejs');
 // set static files
 app.use(express.static('public'));
 
-
 // set favicon
 app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
-
 
 // use express body parser & cookie parser middleware
 app.use(express.json());
@@ -90,7 +88,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /// routes
-app.get('/', ensureAuthenticated, dashboardController.getAllDashboard);
+// client routes
+app.get('/home', clientController.getClientView);
+app.get('/booking', clientController.getClientBooking);
+
+// admin dashboard routes
+app.get('/', ensureAuthenticated, dashboardController.getDashboard);
 
 // user routes
 app.use('/users', userRoutes);
@@ -106,10 +109,6 @@ app.use('/parts', ensureAuthenticated, partRoutes);
 
 // nfc routes
 app.use('/nfc', nfcRoutes);
-
-//client routes
-app.use('/home', clientController.getclients);
-app.use('/form',clientController.getclientsform);
 
 // 404 page
 app.use((req, res) => {
