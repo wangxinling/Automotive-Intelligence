@@ -1,11 +1,12 @@
 // import required modules
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // import models
 const User = require('../models/userModel');
 
 //import configs
 const authConfig = require('../config/auth');
+const mailConfig = require('../config/mail');
 
 /// user controllers
 // get user login page
@@ -38,10 +39,10 @@ const postLogin = (req, res) => {
 }
 
 // register a user
-const postSignup = (req, res) => {
+const postSignup = async (req, res) => {
     const { name, email, password } = req.body;
 
-    User.findOne({ email: email }).then((user) => {
+    User.findOne({ email: email }).then(async (user) => {
         if (user) {
             req.flash("exist", "exist");
             res.redirect("/users/signup");
@@ -52,20 +53,18 @@ const postSignup = (req, res) => {
                 password,
             }
             
-            const newUser = new User(user);
+            const newUser = await new User(user);
 
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(user.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-
-                    newUser.save().then((user) => {
-                        console.log("User has been added to the database");
-                    }).catch((err) => {
-                        console.log(err);
-                    });
-                });
+            const token = jwt.sign({
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                password: newUser.password
+            }, process.env.JWT_SECRET, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
             });
+
+            await mailConfig.sendMail(token);
 
             req.flash("redirect", "signup");
             res.redirect("/users/login");
@@ -73,10 +72,14 @@ const postSignup = (req, res) => {
     });
 }
 
-// log out a user
-const getLogout = (req, res) => {
-    req.logout();
-    res.redirect('/users/login');
+// verify user email
+const getConfirmSignup = (req, res) => {
+    const user = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    
+    // adding local user to the database
+    authConfig.addLocalUser(user);
+
+    res.redirect("/users/login");
 }
 
 // authenticate social network user
@@ -100,11 +103,17 @@ const postSocialLogin = async (req, res, next) => {
         }
 
         // adding social network user to the database
-        authConfig.addUser(req, res, next, user);
+        authConfig.addSocialUser(req, res, next, user);
     } catch (err) {
         console.log(err);
         res.status(401).send();
     }
+}
+
+// log out a user
+const getLogout = (req, res) => {
+    req.logout();
+    res.redirect('/users/login');
 }
 
 // export user controllers
@@ -114,7 +123,8 @@ userController = {
     getSignup,
     postLogin,
     postSignup,
-    getLogout,
-    postSocialLogin
+    getConfirmSignup,
+    postSocialLogin,
+    getLogout
 }
 module.exports = userController;

@@ -15,6 +15,7 @@ router.post('/login', passport.authenticate("local", { failureRedirect: '/users/
 router.get('/login/fail', userController.getLoginFail);
 router.get('/logout', userController.getLogout);
 router.post('/signup', userController.postSignup);
+router.get('/signup/:token', userController.getConfirmSignup);
 router.get('/auth/google', userController.postSocialLogin);
 router.get('/auth/facebook', userController.postSocialLogin);
 

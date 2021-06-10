@@ -48,7 +48,24 @@ exports.ensureAuthenticated = (req, res, next) => {
     res.redirect('/users/login');
 }
 
-exports.addUser = (req, res, next, user) => {
+exports.addLocalUser = (user) => {
+    const newUser = new User(user);
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+
+            newUser.save().then((user) => {
+                console.log("User has been added to the database");
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    });
+}
+
+exports.addSocialUser = (req, res, next, user) => {
     User.findOne({ email: user.email }).then((dbUser) => {
         if (dbUser) {
             req.login(dbUser, (err) => {
