@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs", { username: email, active: "services" }) %>
+        <div class="find content">
+            <form class="search" action="/services/find" method="post">
+                <input type="text" name="search" placeholder="Search.." required>
+	            <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <ul class="search-list">
+                <% if (locals.vehicle && vehicle.length > 0) { %>
+                    <% vehicle.forEach(service => { %>
+                        <li><a href="/services/<%= service.id %>"><%= `${service.carmodel} ${service.carmake}, Size ${service.regoNum}` %></a></li>
+                    <% }) %>
+                <% } else if (locals.vehicle) { %>
+                    <p>Service '<%= regoNum %>' cannot be found!</p>
+                <% } %>
+            </ul>
+        </div>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

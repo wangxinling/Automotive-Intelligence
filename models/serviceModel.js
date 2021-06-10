@@ -4,34 +4,83 @@ const Schema = mongoose.Schema;
 
 // create service schema
 const ServiceSchema = new Schema({
-    client: {
+    job_num: {
         type: String,
         required: true
+    },
+    job_date: {
+        type: String,
+        require : true
     },
     regoNum: {
         type: String,
         required: true
     },
-    make: {
-        type: String,
-        required: true
-    },
-    model: {
+    timein: {
         type: String,
         require: true
     },
-    year: {
+    carmake: {
         type: String,
-        required: true
+        require: true
+    },
+    carmodel: {
+        type: String,
+        require: true
+    },
+    clientname: {
+        type: String,
+        require: true
+    },
+    contactnumber: {
+        type: String,
+        require: true
+    },
+    engine: {
+        type: String,
+        require: true
+    },
+    vin: {
+        type: String,
+        require: true
+    },
+    review: {
+        type: String,
+        require: true
+    },
+    fls: {
+        type: String,
+        require: true,
+        default:0
+    },
+    frs: {
+        type: String,
+        require: true,
+        default:0
+    },
+    bls: {
+        type: String,
+        require: true,
+        default:0
+    },
+    brs: {
+        type: String,
+        require: true,
+        default:0
+    },
+    tech: {
+        type: String,
+        require: true
+    },
+    techid: {
+        type: String,
+        require: true
     },
     odo: {
         type: String,
         require: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
     }
+
 });
 
 // create and export service instance
