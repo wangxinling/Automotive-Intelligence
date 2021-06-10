@@ -1,7 +1,7 @@
 const getclients = (req, res) => {
      
-        res.render('client', {
-            username: req.user.email,
+        res.render('home', {
+            
             
             title: 'Automotive Intelligence | Client'
         });
@@ -10,7 +10,7 @@ const getclients = (req, res) => {
     const getclientsform = (req, res) => {
      
         res.render('clientappointment', {
-            username: req.user.email,
+            
             
             title: 'Automotive Intelligence | Client'
         });

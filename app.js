@@ -101,7 +101,9 @@ app.use('/tools', ensureAuthenticated, toolRoutes);
 app.use('/parts', ensureAuthenticated, partRoutes);
 
 //client routes
-app.use('/client',ensureAuthenticated, clientRoutes);
+app.use('/home', clientController.getclients);
+app.use('/form',clientController.getclientsform);
+
 
 // 404 page
 app.use((req, res) => {

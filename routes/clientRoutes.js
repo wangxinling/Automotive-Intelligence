@@ -7,9 +7,9 @@ const partController = require('../controllers/clientController');
 // create express router
 const router = express.Router();
 
-// part routes
+// client routes
 router.get('/', clientController.getclients);
-router.get('/form',clientController.getclientsform);
+router.get('/',clientController.getclientsform);
 
 // export router handles
 module.exports = router;
