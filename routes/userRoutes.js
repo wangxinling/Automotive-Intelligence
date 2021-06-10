@@ -11,11 +11,13 @@ const router = express.Router();
 // user auth routes
 router.get('/login', userController.getLogin);
 router.get('/signup', userController.getSignup);
-router.post('/login', passport.authenticate("local"), userController.postLogin);
+router.post('/login', passport.authenticate("local", { failureRedirect: '/users/login/fail' }), userController.postLogin);
+router.get('/login/fail', userController.getLoginFail);
 router.get('/logout', userController.getLogout);
 router.post('/signup', userController.postSignup);
-router.get('/auth/google', userController.postGoogleLogin);
-router.get('/auth/facebook', userController.postFacebookLogin);
+router.get('/signup/:token', userController.getConfirmSignup);
+router.get('/auth/google', userController.postSocialLogin);
+router.get('/auth/facebook', userController.postSocialLogin);
 
 // export router handles
 module.exports = router;

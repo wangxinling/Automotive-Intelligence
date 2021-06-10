@@ -11,158 +11,162 @@
 </div>
 
 <script>
+  history.replaceState 
+      ? history.replaceState(null, null, window.location.href.split("#")[0])
+      : window.location.hash = "";
+</script>
 
-const COLORS = [
-  '#4dc9f6',
-  '#f67019',
-  '#f53794',
-  '#537bc4',
-  '#acc236',
-  '#166a8f',
-  '#00a950',
-  '#58595b',
-  '#8549ba'
-];
-function color(index) {
-  return COLORS[index % COLORS.length];
-}
+<script>
+  const COLORS = [
+    '#4dc9f6',
+    '#f67019',
+    '#f53794',
+    '#537bc4',
+    '#acc236',
+    '#166a8f',
+    '#00a950',
+    '#58595b',
+    '#8549ba'
+  ];
+  function color(index) {
+    return COLORS[index % COLORS.length];
+  }
 
-//totalNumChart
-const partsNum = <%= parts.length %>;
-const toolsNum = <%= tools.length %>;
-const servicesNum = <%= services.length %>;
-const labels = ["Parts","Tools","Services"];
-const data = {
-  labels: labels,
-  datasets: [{
-    label: 'The total number of statistics',
-    data: [
-    partsNum,
-    toolsNum,
-    servicesNum
-    ],
-    backgroundColor: [
-    color(0),
-    color(1),
-    color(2)
-    ],
-    borderColor: [
-      'rgb(255, 99, 132)',
-      'rgb(255, 159, 64)',
-      'rgb(201, 203, 207)'
-    ],
-    borderWidth: 1
-  }]
-};
+  //totalNumChart
+  const partsNum = <%= parts.length %>;
+  const toolsNum = <%= tools.length %>;
+  const servicesNum = <%= services.length %>;
+  const labels = ["Parts","Tools","Services"];
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'The total number of statistics',
+      data: [
+      partsNum,
+      toolsNum,
+      servicesNum
+      ],
+      backgroundColor: [
+      color(0),
+      color(1),
+      color(2)
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 1
+    }]
+  };
 
-const config = {
-  type: 'bar',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
-    }
-  },
-};
+    },
+  };
 
-var ctx = document.getElementById('totalNumChart').getContext('2d');
-var myChart = new Chart(ctx, config);
+  var ctx = document.getElementById('totalNumChart').getContext('2d');
+  var myChart = new Chart(ctx, config);
 
 
-//usageChart
-var labelsTool = [];
-var backgroundColorsTool = [];
-var borderColorTool = [];
-var datasTool = [];
-<% var toolDic={}; %>
-<%for (let key in tools) {%>
-  <%  var element = tools[key]; %>
-  <%  if(toolDic[element.name] == null){toolDic[element.name] = element.usageNum; %>
-  <%  }else{toolDic[element.name] += element.usageNum;}    }; %>
-var index = 0;
-<% for (var key in toolDic){ %>
-  labelsTool.push("<%= key %>");
-  backgroundColorsTool.push(color(index));
-  index ++;
-  datasTool.push("<%= toolDic[key] %>");
-<%};%>
+  //usageChart
+  var labelsTool = [];
+  var backgroundColorsTool = [];
+  var borderColorTool = [];
+  var datasTool = [];
+  <% var toolDic={}; %>
+  <%for (let key in tools) {%>
+    <%  var element = tools[key]; %>
+    <%  if(toolDic[element.name] == null){toolDic[element.name] = element.usageNum; %>
+    <%  }else{toolDic[element.name] += element.usageNum;}    }; %>
+  var index = 0;
+  <% for (var key in toolDic){ %>
+    labelsTool.push("<%= key %>");
+    backgroundColorsTool.push(color(index));
+    index ++;
+    datasTool.push("<%= toolDic[key] %>");
+  <%};%>
 
-const dataTool = {
-  labels: labelsTool,
-  datasets: [{
-    label: 'Tool usages',
-    data: datasTool,
-    backgroundColor: backgroundColorsTool,
-    borderWidth: 1
-  }]
-};
+  const dataTool = {
+    labels: labelsTool,
+    datasets: [{
+      label: 'Tool usages',
+      data: datasTool,
+      backgroundColor: backgroundColorsTool,
+      borderWidth: 1
+    }]
+  };
 
-const configTool = {
-  type: 'pie',
-  data: dataTool,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'Tool usages'
+  const configTool = {
+    type: 'pie',
+    data: dataTool,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Tool usages'
+        }
       }
-    }
-  },
-};
+    },
+  };
 
-var ctx2 = document.getElementById('usageChart').getContext('2d');
-var myChartTool = new Chart(ctx2, configTool);
+  var ctx2 = document.getElementById('usageChart').getContext('2d');
+  var myChartTool = new Chart(ctx2, configTool);
 
 
-//partChart
+  //partChart
 
-var labelsPart = [];
-var backgroundColorsPart = [];
+  var labelsPart = [];
+  var backgroundColorsPart = [];
 
-var datasPart = [];
+  var datasPart = [];
 
-<% var partDic={}; %>
-<%for (let key in parts) {%>
-  <%  var element = parts[key]; %>
-  <%  if(partDic[element.name] == null){partDic[element.name] = 1; %>
-  <%  }else{partDic[element.name] += 1;}    }; %>
-var index = 0;
-<% for (var key in partDic){ %>
-  labelsPart.push("<%= key %>");
-  backgroundColorsPart.push(color(index));
-  index ++;
-  datasPart.push("<%= partDic[key] %>");
-<%};%>
+  <% var partDic={}; %>
+  <%for (let key in parts) {%>
+    <%  var element = parts[key]; %>
+    <%  if(partDic[element.name] == null){partDic[element.name] = 1; %>
+    <%  }else{partDic[element.name] += 1;}    }; %>
+  var index = 0;
+  <% for (var key in partDic){ %>
+    labelsPart.push("<%= key %>");
+    backgroundColorsPart.push(color(index));
+    index ++;
+    datasPart.push("<%= partDic[key] %>");
+  <%};%>
 
-const dataPart = {
-  labels: labelsPart,
-  datasets: [{
-    label: 'Parts summary',
-    data: datasPart,
-    backgroundColor: backgroundColorsPart,
-    borderWidth: 1
-  }]
-};
+  const dataPart = {
+    labels: labelsPart,
+    datasets: [{
+      label: 'Parts summary',
+      data: datasPart,
+      backgroundColor: backgroundColorsPart,
+      borderWidth: 1
+    }]
+  };
 
-const configPart = {
-  type: 'bar',
-  data: dataPart,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
+  const configPart = {
+    type: 'bar',
+    data: dataPart,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
       }
-    }
-  },
-};
+    },
+  };
 
-var ctx3 = document.getElementById('partChart').getContext('2d');
-var myChartTool = new Chart(ctx3, configPart);
-
+  var ctx3 = document.getElementById('partChart').getContext('2d');
+  var myChartTool = new Chart(ctx3, configPart);
 </script>

@@ -159,7 +159,7 @@ h3 {
     width: 2.5%;
     text-align: center;
 	border-radius: 50%;
-	padding: 8px;
+	padding: 10px 8px 8px;
 }
 
 .delete:hover {
@@ -463,6 +463,10 @@ list-type-ulli,
 	cursor: pointer;   
 }
 
+.profile button:hover {
+	filter: brightness(0.8);
+}
+
 .profile .username {
 	margin-bottom: 4px;
 }
@@ -663,7 +667,7 @@ figure {
 	border: none;
 	outline: none;
 	width: 100%;
-	padding: 15px 39px;
+	padding: 12px 39px;
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -705,7 +709,7 @@ figure {
 
 .form-group {
 	position: relative;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 	overflow: hidden;
 }
 
@@ -821,7 +825,7 @@ figure {
 .sign label {
 	position: absolute;
 	left: 0;
-	top: 50%;
+	top: 39%;
 	transform: translateY(-50%);
 	-moz-transform: translateY(-50%);
 	-webkit-transform: translateY(-50%);
@@ -890,7 +894,7 @@ figure {
 	-webkit-align-items: center;
 	-o-align-items: center;
 	-ms-align-items: center;
-	margin-top: 80px;
+	margin-top: 40px;
 }
 
 .sign .social-label {

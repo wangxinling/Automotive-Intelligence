@@ -6,7 +6,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const User = require("../models/userModel");
 
 // export passport user authentication
-module.exports = function (passport) {
+module.exports = (passport) => {
     passport.use(
         new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
             // match user

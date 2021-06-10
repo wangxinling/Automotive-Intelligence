@@ -1,21 +1,38 @@
 // import required modules
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // import models
 const User = require('../models/userModel');
 
 //import configs
 const authConfig = require('../config/auth');
+const mailConfig = require('../config/mail');
 
 /// user controllers
 // get user login page
 const getLogin = (req, res) => {
-    res.render('login', { title: 'Login' });
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    } else {
+        const redirect = req.flash('redirect');
+        res.render('login', { title: 'Login', redirect });
+    }
+}
+
+// redirect user login fail
+const getLoginFail = (req, res) => {
+    req.flash("redirect", "login");
+    res.redirect('/users/login');
 }
 
 // get user signup page
 const getSignup = (req, res) => {
-    res.render('signup', { title: 'Register' });
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    } else {
+        const exist = req.flash('exist');
+        res.render('signup', { title: 'Register', exist });
+    }
 }
 
 // log in a user
@@ -30,12 +47,13 @@ const postLogin = (req, res) => {
 }
 
 // register a user
-const postSignup = (req, res) => {
+const postSignup = async (req, res) => {
     const { name, email, password } = req.body;
 
-    User.findOne({ email: email }).then((user) => {
+    User.findOne({ email: email }).then(async (user) => {
         if (user) {
-          res.send({ errors: ["Email already exists"] });
+            req.flash("exist", "exist");
+            res.redirect("/users/signup");
         } else {
             user = {
                 name,
@@ -43,24 +61,61 @@ const postSignup = (req, res) => {
                 password,
             }
             
-            const newUser = new User(user);
+            const newUser = await new User(user);
 
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(user.password, salt, (err, hash) => {
-                    if (err) throw err;
-                    newUser.password = hash;
-
-                    newUser.save().then((user) => {
-                        console.log("User has been added to the database");
-                    }).catch((err) => {
-                        console.log(err)
-                    });
-                });
+            const token = jwt.sign({
+                id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                password: newUser.password
+            }, process.env.JWT_SECRET, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
             });
+
+            await mailConfig.sendMail(token);
+
+            req.flash("redirect", "signup");
+            res.redirect("/users/login");
         }
     });
+}
+
+// verify user email
+const getConfirmSignup = (req, res) => {
+    const user = jwt.verify(req.params.token, process.env.JWT_SECRET);
+    
+    // adding local user to the database
+    authConfig.addLocalUser(user);
 
     res.redirect("/users/login");
+}
+
+// authenticate social network user
+const postSocialLogin = async (req, res, next) => {
+    try {
+        let profile, id = null;
+        const code = req.query.code;
+
+        if (req.route.path.split("/")[2] === "google") {
+            profile = await authConfig.getGoogleProfile(code);
+            id = profile.sub;
+        } else {
+            profile = await authConfig.getFacebookProfile(code);
+            id = profile.id;
+        }
+        
+        const user = {
+            id: id,
+            name: profile.name,
+            email: profile.email
+        }
+
+        // adding social network user to the database
+        authConfig.addSocialUser(req, res, next, user);
+    } catch (err) {
+        console.log(err);
+        res.status(401).send();
+    }
 }
 
 // log out a user
@@ -69,54 +124,15 @@ const getLogout = (req, res) => {
     res.redirect('/users/login');
 }
 
-// authenticate google user
-const postGoogleLogin = async (req, res) => {
-    try {
-        const code = req.query.code;
-        const profile = await authConfig.getGoogleProfile(code);
-        const user = {
-            id: profile.sub,
-            name: profile.name,
-            email: profile.email
-        }
-
-        // adding google user to the database
-        authConfig.addUser(req, user);
-        res.redirect("/");
-    } catch (err) {
-        console.log(err);
-        res.status(401).send();
-    }
-}
-
-// authenticate facebook user
-const postFacebookLogin = async (req, res) => {
-    try {
-        const code = req.query.code;
-        const profile = await authConfig.getFacebookProfile(code);
-        const user = {
-            id: profile.id,
-            name: profile.name,
-            email: profile.email
-        }
-    
-        // adding facebook user to the database
-        authConfig.addUser(req, user);
-        res.redirect("/");
-      } catch (err) {
-        console.log(err);
-        res.status(401).send();
-      }
-}
-
 // export user controllers
 userController = {
     getLogin,
+    getLoginFail,
     getSignup,
     postLogin,
     postSignup,
-    getLogout,
-    postGoogleLogin,
-    postFacebookLogin
+    getConfirmSignup,
+    postSocialLogin,
+    getLogout
 }
 module.exports = userController;

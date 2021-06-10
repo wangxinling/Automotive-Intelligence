@@ -48,16 +48,32 @@ exports.ensureAuthenticated = (req, res, next) => {
     res.redirect('/users/login');
 }
 
-exports.addUser = (req, user) => {
+exports.addLocalUser = (user) => {
+    const newUser = new User(user);
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+
+            newUser.save().then((user) => {
+                console.log("User has been added to the database");
+            }).catch((err) => {
+                console.log(err);
+            });
+        });
+    });
+}
+
+exports.addSocialUser = (req, res, next, user) => {
     User.findOne({ email: user.email }).then((dbUser) => {
         if (dbUser) {
             req.login(dbUser, (err) => {
                 if(err) return next(err);
+                res.redirect("/");
             });
 
             console.log("This user already exists");
-            console.log(req.user);
-            console.log(req.session);
         } else {
             dbUser = {
                 name: user.name,
@@ -75,17 +91,18 @@ exports.addUser = (req, user) => {
                     newUser.save().then((user) => {
                         req.login(user, (err) => {
                             if(err) return next(err);
+                            res.redirect("/");
                         });
                         
                         console.log("User has been added to the database");
-                        console.log(req.user);
-                        console.log(req.session);
                     }).catch((err) => {
                         console.log(err);
                     });
                 });
             });
         }
+        console.log(req.user);
+        console.log(req.session);
     });
 }
 

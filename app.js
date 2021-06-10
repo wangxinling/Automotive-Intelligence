@@ -7,6 +7,7 @@ const favicon = require('serve-favicon');
 const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
+const flash = require("connect-flash");
 const cookieParser = require('cookie-parser');
 
 // import routes
@@ -68,18 +69,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// set express session
+// set express session & connect flash middleware
 app.use(
 	session({
 		secret: process.env.SECRET,
 		resave: true,
 		saveUninitialized: true,
 		cookie: {
+            sameSite: 'none',
             secure: true,
 			maxAge: 3600000
 		}
 	})
 );
+app.use(flash());
 
 // passport middleware
 app.use(passport.initialize());
