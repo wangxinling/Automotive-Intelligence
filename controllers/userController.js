@@ -11,8 +11,12 @@ const mailConfig = require('../config/mail');
 /// user controllers
 // get user login page
 const getLogin = (req, res) => {
-    const redirect = req.flash('redirect');
-    res.render('login', { title: 'Login', redirect });
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    } else {
+        const redirect = req.flash('redirect');
+        res.render('login', { title: 'Login', redirect });
+    }
 }
 
 // redirect user login fail
@@ -23,8 +27,12 @@ const getLoginFail = (req, res) => {
 
 // get user signup page
 const getSignup = (req, res) => {
-    const exist = req.flash('exist');
-    res.render('signup', { title: 'Register', exist });
+    if (req.isAuthenticated()) {
+        res.redirect("/");
+    } else {
+        const exist = req.flash('exist');
+        res.render('signup', { title: 'Register', exist });
+    }
 }
 
 // log in a user
