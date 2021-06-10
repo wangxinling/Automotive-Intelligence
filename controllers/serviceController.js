@@ -100,7 +100,15 @@ const getServiceDetails = (req, res) => {
         res.render('404', { title: 'Page not found' });
     });
 }
-
+// delete a service from database
+const deleteService = (req, res) => {
+    const id = req.params.id;
+    Service.findByIdAndDelete(id).then((result) => {
+        res.json({ redirect: '/services' });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
 
 
 // export service controllers
@@ -112,5 +120,6 @@ serviceController = {
     getServiceDetails,
     getFindService,
     getAllService,
+    deleteService,
 }
 module.exports = serviceController;

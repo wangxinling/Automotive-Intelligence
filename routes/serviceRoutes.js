@@ -17,8 +17,7 @@ router.post('/add', serviceController.postAddService);
 
 router.post('/find',serviceController.postFindService);
 router.get('/:id', serviceController.getServiceDetails);
-
-
+router.delete('/:id', serviceController.deleteService);
 
 
 
