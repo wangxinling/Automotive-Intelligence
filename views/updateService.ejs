@@ -56,44 +56,34 @@
                     <table class="tyre">
                         <tr>
                             <th><h4>Tyre</h4></th>
-                            <td><label class="label service"><input type="radio" name="review" id="new"
-                                <% if(vehicle.review == "New") { %> checked <% } %>
-                                ><p>New</p></label></td>
-                            <td><label class="label service"><input type="radio" name="review" id="excellent"
-                                <% if(vehicle.review == "Excellent") { %> checked <% } %>
-                                ><p>Excellent</p></label></td>
-                            <td><label class="label service"><input type="radio" name="review" id="good"
-                                <% if(vehicle.review == "Good") { %> checked <% } %>
-                                ><p>Good</p></label></td>
-                            <td><label class="label service"><input type="radio" name="review" id="fair"
-                                <% if(vehicle.review == "Fair") { %> checked <% } %>
-                                ><p>Fair</p></label></td>
-                            <td><label class="label service"><input type="radio" name="review" id="poor"
-                                <% if(vehicle.review == "Poor") { %> checked <% } %>
-                                ><p>Poor</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="new" value="New"
+                                <% if(vehicle.review == "New") { %> checked <% } %>><p>New</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="excellent" value="Excellent"
+                                <% if(vehicle.review == "Excellent") { %> checked <% } %>><p>Excellent</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="good" value="Good"
+                                <% if(vehicle.review == "Good") { %> checked <% } %>><p>Good</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="fair" value="Fair"
+                                <% if(vehicle.review == "Fair") { %> checked <% } %>><p>Fair</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="poor" value="Poor"
+                                <% if(vehicle.review == "Poor") { %> checked <% } %>><p>Poor</p></label></td>
                         </tr>
                         <tr class="tdepth">
                             <th><h4>Tyre Depth</h4></th>
-                            <td><label class="label service"><p>FLS</p><input type="text" name="fls" class="depth" id="fls" value="<%= vehicle.fls %>" ><p>mm</p></label></td>
-                            <td><label class="label service"><p>FRS</p><input type="text" name="frs" class="depth" id="frs" value="<%= vehicle.frs %>" ><p>mm</p></label></td>
-                            <td><label class="label service"><p>BLS</p><input type="text" name="bls" class="depth" id="bls" value="<%= vehicle.bls %>" ><p>mm</p></label></td>
-                            <td><label class="label service"><p>BRS</p><input type="text" name="brs" class="depth" id="brs" value="<%= vehicle.brs %>" ><p>mm</p></label></td>
-                            
+                            <td><label class="label service"><p>FLS</p><input type="text" name="fls" class="depth" id="fls" value="<%= vehicle.fls %>"><p>mm</p></label></td>
+                            <td><label class="label service"><p>FRS</p><input type="text" name="frs" class="depth" id="frs" value="<%= vehicle.frs %>"><p>mm</p></label></td>
+                            <td><label class="label service"><p>BLS</p><input type="text" name="bls" class="depth" id="bls" value="<%= vehicle.bls %>"><p>mm</p></label></td>
+                            <td><label class="label service"><p>BRS</p><input type="text" name="brs" class="depth" id="brs" value="<%= vehicle.brs %>"><p>mm</p></label></td>
                         </tr>
-                        
                     </table>
-                    
                 </fieldset>
                 <div class = "row1">
                     <div >
                         <label for="tech">Technician Name:</label>
                         <input type="text" id="tech" name="tech" placeholder="Enter Technician" value="<%= vehicle.tech %>"  required>
-                        
                     </div>
                     <div>
                         <label for="techid">Technician ID:</label>
                         <input type="text" id="techid" name="techid" placeholder="Enter Technician ID" value="<%= vehicle.techid %>"  required>
-                        
                     </div>
                     <div>
                         <label for="odo">Odometer Reading:</label>

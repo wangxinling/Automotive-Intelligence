@@ -1,5 +1,6 @@
 // import required modules
 const mongoose = require('mongoose');
+const axios = require("axios")
 
 // import models
 const Service = require('../models/serviceModel');
@@ -44,6 +45,7 @@ const postFindService = (req, res) => {
     });
 }
 
+// get all services
 const getAllService = (req, res) =>{
     Service.find().sort({ createdAt: -1 }).then((result) => {
         res.render('services', {
@@ -101,6 +103,7 @@ const getServiceDetails = (req, res) => {
         res.render('404', { title: 'Page not found' });
     });
 }
+
 // delete a service from database
 const deleteService = (req, res) => {
     const id = req.params.id;
@@ -111,8 +114,10 @@ const deleteService = (req, res) => {
     });
 }
 
-const getUpdateServicePage = (req, res) => {
+// get update service page
+const getUpdateService = (req, res) => {
     const id = req.params.id;
+
     Service.findById(id).then((result) => {
         res.render('updateService', {
             email: req.user.email,
@@ -125,6 +130,7 @@ const getUpdateServicePage = (req, res) => {
     });
 }
 
+// update service details
 const updateServiceDetails = (req, res) => {
     const id = req.params.id;
  
@@ -161,6 +167,41 @@ const updateServiceDetails = (req, res) => {
     });
 }
 
+// get registration details
+const getVehicleInfo = (req, res) => {
+    const rego = req.params.id;
+    const options = {
+        method: 'GET',
+        url: `https://vic-roads.p.rapidapi.com/vicroads/${rego}`,
+        headers: {
+            'x-rapidapi-key': process.env.RAPID_API_KEY,
+            'x-rapidapi-host': process.env.RAPID_API_HOST
+        }
+    };
+    
+    try {
+        axios.request(options).then((response) => {
+            const vehicle = response.data.vehicle.split(" ");
+            let json = JSON.stringify({ 
+                regoNum: rego,
+                carmake: vehicle[2],
+                carmodel: vehicle[3],
+                engine: response.data.engine_number,
+                vin: response.data.vin_number,
+            });
+
+            res.writeHead(200, {"Content-Type": "application/json"});
+            res.end(json);
+        }).catch((err) => {
+            console.error(err);
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(401).send();
+
+    }
+}
+
 // export service controllers
 serviceController = {
     getService,
@@ -171,7 +212,8 @@ serviceController = {
     getFindService,
     getAllService,
     deleteService,
-    getUpdateServicePage,
+    getUpdateService,
     updateServiceDetails,
+    getVehicleInfo
 }
 module.exports = serviceController;

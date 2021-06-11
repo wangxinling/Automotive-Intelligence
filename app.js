@@ -58,7 +58,12 @@ io.on("connection", (socket) => {
 
 // connect to mongodb & listen for requests
 const uri = process.env.MONGODB_URI;
-const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+};
 
 mongoose.connect(uri, options).then((result) => {
     console.log("Database connected");
@@ -94,7 +99,6 @@ app.use(
 		resave: true,
 		saveUninitialized: true,
 		cookie: {
-            sameSite: 'strict',
             secure: true,
 			maxAge: 3600000
 		}
