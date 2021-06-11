@@ -87,9 +87,27 @@
                     </div>
                 </div>
                 <div class="btn service"><button>Add Service</button>
+                <button id="checkButton" type="button">Check Registration</button>
             </div>
             </form>
         </div>
         <%- include("./partials/footer.ejs") %>
     </body>
+    <script>
+         checkButton.addEventListener("click", async () => {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var regoInfor =  (new Function("return " + this.responseText))();
+                    carmake.value = regoInfor.carmake;
+                    carmodel.value = regoInfor.carmodel;
+                    engine.value = regoInfor.engine;
+                    vin.value = regoInfor.vin;
+                }
+            };
+            xhttp.open("GET", "/services/rego/"+ regoNum.value, true);
+            xhttp.send();
+
+        });
+    </script>
 </html>

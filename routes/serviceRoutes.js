@@ -3,6 +3,7 @@ const express = require('express');
 
 // import controllers
 const serviceController = require('../controllers/serviceController');
+const clientController = require('../controllers/clientController');
 
 // create express router
 const router = express.Router();
@@ -18,6 +19,8 @@ router.delete('/:id', serviceController.deleteService);
 
 router.get('/update/:id', serviceController.getUpdateServicePage);
 router.post('/update/:id', serviceController.updateServiceDetails);
+
+router.get('/rego/:id',clientController.getRegoNumberInfor);
 
 // export router handles
 module.exports = router;
