@@ -16,5 +16,8 @@ router.post('/find', serviceController.postFindService);
 router.get('/:id', serviceController.getServiceDetails);
 router.delete('/:id', serviceController.deleteService);
 
+router.get('/update/:id', serviceController.getUpdateServicePage);
+router.post('/update/:id', serviceController.updateServiceDetails);
+
 // export router handles
 module.exports = router;

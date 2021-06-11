@@ -111,6 +111,56 @@ const deleteService = (req, res) => {
     });
 }
 
+const getUpdateServicePage = (req, res) => {
+    const id = req.params.id;
+    Service.findById(id).then((result) => {
+        res.render('updateService', {
+            email: req.user.email,
+            vehicle: result,
+            title: 'Vehicle Service Details'
+        });
+    }).catch((err) => {
+        console.log(err);
+        res.render('404', { title: 'Page not found' });
+    });
+}
+
+const updateServiceDetails = (req, res) => {
+    const id = req.params.id;
+ 
+    Service.findByIdAndUpdate(
+        { _id: id },
+        {   job_num:req.body.job_num,
+            job_date:req.body.job_date,
+            regoNum:req.body.regoNum,
+            timein:req.body.timein,
+            carmake:req.body.carmake,
+            carmodel:req.body.carmodel,
+            clientname:req.body.clientname,
+            contactnumber:req.body.contactnumber,
+            engine:req.body.engine,
+            vin:req.body.vin,
+            review:req.body.review,
+            fls:req.body.fls,
+            frs:req.body.frs,
+            bls:req.body.bls,
+            brs:req.body.brs,
+            tech:req.body.tech,
+            techid:req.body.techid,
+            odo:req.body.odo, 
+        },
+        { new: true }
+    ).then((result) => {
+        res.render('serviceDetails', {
+            email: req.user.email,
+            vehicle: result,
+            title: 'Vehicle Service Details'
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+}
+
 // export service controllers
 serviceController = {
     getService,
@@ -120,6 +170,8 @@ serviceController = {
     getServiceDetails,
     getFindService,
     getAllService,
-    deleteService
+    deleteService,
+    getUpdateServicePage,
+    updateServiceDetails,
 }
 module.exports = serviceController;

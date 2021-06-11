@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+    <body>
+        <%- include("./partials/nav.ejs", { username: email, active: "services" }) %>
+        <div class="add content">
+            <form action="/services/update/<%= vehicle.id %>" method="post">
+                <div class="row1">
+                    <div class="label">
+                        <label for="job_num">Job no:</label>
+                        <input type="text" id="job_num" name="job_num" placeholder="Enter Job Number" value="<%= vehicle.job_num %>" required>
+                    </div>
+                    <div class="label">
+                        <label for="job_date">Job Date:</label>
+                        <input type="date" id="job_date" name="job_date" placeholder="Enter Client" value="<%= vehicle.job_date %>"  required>
+                    </div>
+                    <div class = "label">
+                        <label for="regoNum">Rego Number:</label>
+                        <input type="text" id="regoNum" name="regoNum" placeholder="Enter Rego Number" value="<%= vehicle.regoNum %>"  required>
+                    </div>
+                </div>
+                <div class="row1">
+                    <div class="label">
+                        <label for="timein">Time in:</label>
+                        <input type="time" id="timein" name="timein" placeholder="Enter Time-in" value="<%= vehicle.timein %>"  required>
+                    </div>
+                    <div class="label">
+                        <label for="carmake">Car Make:</label>
+                        <input type="text" id="carmake" name="carmake" placeholder="Enter Car Make" value="<%= vehicle.carmake %>"  required>
+                    </div>
+                    <div class = "label">
+                        <label for="carmodel">Car Model:</label>
+                        <input type="text" id="carmodel" name="carmodel" placeholder="Enter Car Model" value="<%= vehicle.carmodel %>"  required>
+                    </div>
+                </div>
+                <div class="row2">
+                    <div class="label">
+                        <label for="clientname">Client Name:</label>
+                        <input type="text" id="clientname" name="clientname" placeholder="Enter Client" value="<%= vehicle.clientname %>"  required>
+                    </div>
+                    <div class="label">
+                        <label for="contactnumber">Contact Number:</label>
+                        <input type="text" id="contactnumber" name="contactnumber" placeholder="Enter Contact" value="<%= vehicle.contactnumber %>"  required>
+                    </div>
+                    <div class = "label">
+                        <label for="engine"> Engine No:</label>
+                        <input type="text" id="engine" name="engine" placeholder="Enter Engine Number" value="<%= vehicle.engine %>"  required>
+                    </div>
+                    <div class = "label">
+                        <label for="vin"> VIN No:</label>
+                        <input type="text" id="vin" name="vin" placeholder="Enter VIN Number" value="<%= vehicle.vin %>"  required>
+                    </div>
+                </div>
+                <fieldset>
+                    <legend><b>Tyre Condition</b></legend>
+                    <table class="tyre">
+                        <tr>
+                            <th><h4>Tyre</h4></th>
+                            <td><label class="label service"><input type="radio" name="review" id="new"
+                                <% if(vehicle.review == "New") { %> checked <% } %>
+                                ><p>New</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="excellent"
+                                <% if(vehicle.review == "Excellent") { %> checked <% } %>
+                                ><p>Excellent</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="good"
+                                <% if(vehicle.review == "Good") { %> checked <% } %>
+                                ><p>Good</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="fair"
+                                <% if(vehicle.review == "Fair") { %> checked <% } %>
+                                ><p>Fair</p></label></td>
+                            <td><label class="label service"><input type="radio" name="review" id="poor"
+                                <% if(vehicle.review == "Poor") { %> checked <% } %>
+                                ><p>Poor</p></label></td>
+                        </tr>
+                        <tr class="tdepth">
+                            <th><h4>Tyre Depth</h4></th>
+                            <td><label class="label service"><p>FLS</p><input type="text" name="fls" class="depth" id="fls" value="<%= vehicle.fls %>" ><p>mm</p></label></td>
+                            <td><label class="label service"><p>FRS</p><input type="text" name="frs" class="depth" id="frs" value="<%= vehicle.frs %>" ><p>mm</p></label></td>
+                            <td><label class="label service"><p>BLS</p><input type="text" name="bls" class="depth" id="bls" value="<%= vehicle.bls %>" ><p>mm</p></label></td>
+                            <td><label class="label service"><p>BRS</p><input type="text" name="brs" class="depth" id="brs" value="<%= vehicle.brs %>" ><p>mm</p></label></td>
+                            
+                        </tr>
+                        
+                    </table>
+                    
+                </fieldset>
+                <div class = "row1">
+                    <div >
+                        <label for="tech">Technician Name:</label>
+                        <input type="text" id="tech" name="tech" placeholder="Enter Technician" value="<%= vehicle.tech %>"  required>
+                        
+                    </div>
+                    <div>
+                        <label for="techid">Technician ID:</label>
+                        <input type="text" id="techid" name="techid" placeholder="Enter Technician ID" value="<%= vehicle.techid %>"  required>
+                        
+                    </div>
+                    <div>
+                        <label for="odo">Odometer Reading:</label>
+                        <input type="text" id="odo" name="odo" placeholder="Enter Odometer Reading" value="<%= vehicle.odo %>"  required>
+                    </div>
+                </div>
+                <div class="btn service"><button>Update Service</button>
+            </div>
+            </form>
+        </div>
+        <%- include("./partials/footer.ejs") %>
+    </body>
+</html>

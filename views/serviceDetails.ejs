@@ -30,11 +30,14 @@
                 <p><label>Technician ID: </label><label><%= vehicle.techid %></label></p>
                 <p><label>Odometer: </label><label><%= vehicle.odo %></label></p>
                 </div>
+                <a class="refresh" href="/services/update/<%= vehicle.id %>"><i class="fa fa-refresh"></i></a>
                 <a class="delete" onclick="deleteItem();" data-id="<%= vehicle.id %>"><i class="fa fa-trash"></i></a>
-            
             
             </div>
         </div>
         <%- include("./partials/footer.ejs") %>
          </body>
+         <script>
+
+         </script>
 </html>
