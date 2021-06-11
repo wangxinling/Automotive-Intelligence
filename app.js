@@ -7,6 +7,7 @@ const favicon = require('serve-favicon');
 const passport = require('passport');
 const path = require('path');
 const fs = require('fs');
+const cors = require("cors");
 const flash = require("connect-flash");
 const cookieParser = require('cookie-parser');
 
@@ -40,13 +41,28 @@ const httpsOptions = {
     cert: fs.readFileSync(path.join(__dirname,'sslcert/server.crt'))
 }
 
+// create https server using ssl certificate
+const server = https.createServer(httpsOptions, app);
+
+// set socket io to use by express server
+const io = require("socket.io")(server);
+
+// connect the socket in server
+io.on("connection", (socket) => {
+    console.log("A user connected");
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected');
+    });
+});
+
 // connect to mongodb & listen for requests
 const uri = process.env.MONGODB_URI;
 const options = { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true };
 
 mongoose.connect(uri, options).then((result) => {
     console.log("Database connected");
-    https.createServer(httpsOptions, app).listen(port, () => {
+    server.listen(port, () => {
         console.log(`https://localhost:${port}`);
     });
 }).catch((err) => {
@@ -57,6 +73,9 @@ mongoose.connect(uri, options).then((result) => {
 app.set('view engine', 'ejs');
 
 /// middlewares
+// set express app to handle cors
+app.use(cors());
+
 // set static files
 app.use(express.static('public'));
 
@@ -75,7 +94,7 @@ app.use(
 		resave: true,
 		saveUninitialized: true,
 		cookie: {
-            sameSite: 'none',
+            sameSite: 'strict',
             secure: true,
 			maxAge: 3600000
 		}
