@@ -10,9 +10,9 @@ const router = express.Router();
 // service routes
 router.get('/', serviceController.getAllService);
 router.get('/add', serviceController.getAddService);
-router.get('/find',serviceController.getFindService);
+router.get('/find', serviceController.getFindService);
 router.post('/add', serviceController.postAddService);
-router.post('/find',serviceController.postFindService);
+router.post('/find', serviceController.postFindService);
 router.get('/:id', serviceController.getServiceDetails);
 router.delete('/:id', serviceController.deleteService);
 

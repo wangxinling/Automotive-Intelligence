@@ -110,6 +110,7 @@ app.use(passport.session());
 // client routes
 app.get('/home', clientController.getClientView);
 app.get('/booking', clientController.getClientBooking);
+app.post('/booking', clientController.postAddClientBooking);
 
 // admin dashboard routes
 app.get('/', ensureAuthenticated, dashboardController.getDashboard);

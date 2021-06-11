@@ -18,7 +18,7 @@ const ServiceSchema = new Schema({
     },
     timein: {
         type: String,
-        require: true
+        default: "12:00"
     },
     carmake: {
         type: String,
@@ -46,35 +46,31 @@ const ServiceSchema = new Schema({
     },
     review: {
         type: String,
-        require: true
+        default: "Good"
     },
     fls: {
         type: String,
-        require: true,
         default:0
     },
     frs: {
         type: String,
-        require: true,
         default:0
     },
     bls: {
         type: String,
-        require: true,
         default:0
     },
     brs: {
         type: String,
-        require: true,
         default:0
     },
     tech: {
         type: String,
-        require: true
+        default: null
     },
     techid: {
         type: String,
-        require: true
+        default: null
     },
     odo: {
         type: String,

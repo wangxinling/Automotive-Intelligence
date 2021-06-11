@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/FSocietyLK/Automotive-Intelligence#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.5",

@@ -36,7 +36,8 @@ const postFindService = (req, res) => {
         res.render('findServices', {
             email: req.user.email,
             vehicle: result,
-            regoNum, title: 'Automotive Intelligence | Services'
+            regoNum,
+            title: 'Automotive Intelligence | Services'
         });
     }).catch((err) => {
         console.log(err);
@@ -46,9 +47,9 @@ const postFindService = (req, res) => {
 const getAllService = (req, res) =>{
     Service.find().sort({ createdAt: -1 }).then((result) => {
         res.render('services', {
-            'vehicles': result,
-            'email': req.user.email,
-            'title': 'Automotive Intelligence | Services'
+            vehicles: result,
+            email: req.user.email,
+            title: 'Automotive Intelligence | Services'
         });
     }).catch((err) => {
         console.log(err);
@@ -77,7 +78,7 @@ const postAddService = (req, res) => {
         brs: req.body.brs,
         tech: req.body.tech,
         techid: req.body.techid,
-        odo: req.body.odo,
+        odo: req.body.odo
     });
     service.save().then((result) => {
         res.redirect('/services/' + id.toString());
@@ -119,6 +120,6 @@ serviceController = {
     getServiceDetails,
     getFindService,
     getAllService,
-    deleteService,
+    deleteService
 }
 module.exports = serviceController;

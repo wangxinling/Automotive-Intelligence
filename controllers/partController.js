@@ -60,7 +60,8 @@ const postFindPart = (req, res) => {
             Part.find({ "nfcTagID": { $regex: ".*" + part + ".*" } }).then((result) => {
                 res.render('findPart', {
                     email: req.user.email,
-                    list: result, part,
+                    list: result,
+                    part,
                     title: 'Find a part'
                 });
             })
@@ -69,7 +70,8 @@ const postFindPart = (req, res) => {
         {
             res.render('findPart', {
                 email: req.user.email,
-                list: result, part,
+                list: result,
+                part,
                 title: 'Find a part'
             });
         }
