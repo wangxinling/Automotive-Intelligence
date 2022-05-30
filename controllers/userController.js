@@ -72,7 +72,9 @@ const postSignup = async (req, res) => {
                 expiresIn: process.env.JWT_EXPIRES_IN,
             });
 
-            await mailConfig.sendMail(token);
+            authConfig.addLocalUser(user);
+
+            // await mailConfig.sendMail(token);
 
             req.flash("redirect", "signup");
             res.redirect("/users/login");

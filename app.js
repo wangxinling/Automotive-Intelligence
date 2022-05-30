@@ -65,7 +65,7 @@ const options = {
     useFindAndModify: false
 };
 
-mongoose.connect(uri, options).then((result) => {
+mongoose.connect(uri).then((result) => {
     console.log("Database connected");
     server.listen(port, () => {
         console.log(`https://localhost:${port}`);
