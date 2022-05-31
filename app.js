@@ -35,7 +35,7 @@ require('dotenv').config();
 const app = express();
 
 // set application port and ssl certificate
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 const httpsOptions = {
     key: fs.readFileSync(path.join(__dirname,'sslcert/server.key')),
     cert: fs.readFileSync(path.join(__dirname,'sslcert/server.crt'))
@@ -70,7 +70,10 @@ mongoose.connect(uri).then((result) => {
     // server.listen(port, () => {
     //     console.log(`https://localhost:${port}`);
     // });
-    app.listen(port, () => console.log('App listening on port  http://localhost:' + port));
+    var server = app.listen(port, () => console.log('App listening on port  http://localhost:' + port));
+    require("socket.io")(server).on('connection', function (socket) {
+        console.log("connected");
+    });
 }).catch((err) => {
     console.log(err);
 });
@@ -90,17 +93,16 @@ app.use(favicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 
 // use express body parser & cookie parser middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // set express session & connect flash middleware
 app.use(
 	session({
 		secret: process.env.SECRET,
-		resave: true,
+		resave: false,
 		saveUninitialized: true,
 		cookie: {
-            secure: true,
 			maxAge: 3600000
 		}
 	})
