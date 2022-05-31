@@ -35,26 +35,26 @@ require('dotenv').config();
 const app = express();
 
 // set application port and ssl certificate
-const port = process.env.PORT || 443;
+const port = process.env.PORT || 8080;
 const httpsOptions = {
     key: fs.readFileSync(path.join(__dirname,'sslcert/server.key')),
     cert: fs.readFileSync(path.join(__dirname,'sslcert/server.crt'))
 }
 
 // create https server using ssl certificate
-const server = https.createServer(httpsOptions, app);
+// const server = https.createServer(httpsOptions, app);
 
 // set socket io to use by express server
-const io = require("socket.io")(server);
+// const io = require("socket.io")(server);
 
-// connect the socket in server
-io.on("connection", (socket) => {
-    console.log("A user connected");
+// // connect the socket in server
+// io.on("connection", (socket) => {
+//     console.log("A user connected");
 
-    socket.on('disconnect', () => {
-        console.log('A user disconnected');
-    });
-});
+//     socket.on('disconnect', () => {
+//         console.log('A user disconnected');
+//     });
+// });
 
 // connect to mongodb & listen for requests
 const uri = process.env.MONGODB_URI;
@@ -67,9 +67,10 @@ const options = {
 
 mongoose.connect(uri).then((result) => {
     console.log("Database connected");
-    server.listen(port, () => {
-        console.log(`https://localhost:${port}`);
-    });
+    // server.listen(port, () => {
+    //     console.log(`https://localhost:${port}`);
+    // });
+    app.listen(port, () => console.log('App listening on port  http://localhost:' + port));
 }).catch((err) => {
     console.log(err);
 });
